@@ -3,6 +3,7 @@
 class Data extends CI_Model {
 var $temporal;
 var $temporal2;
+var $temporal3;
 var $datos;
 var $bandera=null;
 
@@ -133,7 +134,7 @@ var $bandera=null;
 				);
 		}//fin del foreach
 		return $this->temporal;
-
+//386765955-3
 	}//fin de traer_secciones
 
 	function traer_alumnos_inscritos($id_seccion=""){
@@ -143,6 +144,7 @@ var $bandera=null;
 				foreach ($query->result() as $row) {
 					$representante=$this->traer_nombre_representante_id($row->id_representante);
 					$this->temporal [] =array(
+												'id'=>$row->id,
 												'nombres'=>$row->nombres,
 												'apellidos'=>$row->apellidos,
 												'cedula'=>$row->cedula,
@@ -180,6 +182,42 @@ var $bandera=null;
 		return $this->temporal2;
 	}
 
+	function traer_alumno($id=""){
+		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id` = '$id'");
+		$this->temporal=null;
+		foreach ($query->result() as $row) {
+			$seccion_grado=traer_seccion_grado($row->id_seccion);
+			$this->temporal = array(
+								'id' => $row->id,
+								'nombres' => $row->nombres,
+								'apellidos' => $row->apellidos,
+								'cedula' => $row->cedula,
+								'edad' => $row->edad,
+								'seccion' => $seccion_grado['seccion'],
+								'grado' => $seccion_grado['grado'] 
+								);
+		}
+		return $this->temporal;
+	}//fin de traer_alumno
+
+	function traer_seccion_grado($id_seccion=""){
+		$query=$this->db->query("SELECT * FROM `secciones` WHERE `id` =$id_seccion");
+		$this->temporal3=null;
+		foreach ($query->result() as $row) {
+			$this->temporal3=array(
+									'seccion'=>$row->seccion,
+									'grado'=>$row->grado,
+									'turno'=>$row->turno,
+									'cap_alumnos'=>$row->cap_alumnos,
+									'id_docente'=>$row->id_docente
+									);
+		}//fin de foreach
+
+		return $this->temporal3;
+
+	}//fin de traer_seccion_grado
+	
+
 	function reg_alumno($datos=""){
 		//echo "desde data:";
 		$this->temporal=$datos;
@@ -212,6 +250,24 @@ var $bandera=null;
 			return $this->bandera;
 
 	}//reg_alumno
+
+	function reg_avance_integral($avance){
+		$sql="INSERT INTO `proyecto`.`avance_integral` (
+`id` ,
+`id_alumno` ,
+`cognitiva` ,
+`lenguage` ,
+`social` ,
+`afectiva` ,
+`motora` ,
+`sexual` ,
+`fisica` ,
+`moral`
+)
+VALUES (
+NULL, '5', 'cognitiva', 'leng', 'social', 'afectiva', 'moral', 'seu', 'fisi', 'moral'
+);";
+	}//
 
 	function traer_docente($id=""){
 		$query=$this->db->query("SELECT * FROM `docentes` WHERE `id` LIKE '$id'");

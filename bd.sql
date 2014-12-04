@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-11-2014 a las 16:38:25
+-- Tiempo de generación: 04-12-2014 a las 16:37:38
 -- Versión del servidor: 5.5.40-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.5
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto`
 --
-DROP DATABASE `proyecto`;
 CREATE DATABASE IF NOT EXISTS `proyecto` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `proyecto`;
 
@@ -29,22 +28,22 @@ USE `proyecto`;
 -- Estructura de tabla para la tabla `alumnos`
 --
 
-DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE IF NOT EXISTS `alumnos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cedula` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `edad` int(5) NOT NULL,
-  `alergico` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcon_alergia` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `alergico` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion_alergia` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   `peso` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `altura` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `ult_visita_psicologo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `id_seccion` int(11) NOT NULL,
-  `id_representane` int(11) NOT NULL,
-  `fecha_inscripcion` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_representante` int(11) NOT NULL,
+  `fecha_inscripcion` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
 
 --
 -- Truncar tablas antes de insertar `alumnos`
@@ -55,8 +54,12 @@ TRUNCATE TABLE `alumnos`;
 -- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcon_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representane`, `fecha_inscripcion`) VALUES
-(1, 'RAMONCITO', 'HERNANDEZ', 'V-15.457.324', 31, 'S', 'caraot', '40', '1.70m', '01-05-2014', 5, 2, '2014-11-05 16:28:04');
+INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES
+(1, 'RAMONCITO', 'HERNANDEZ', 'V-15.457.324', 31, 'S', 'caraot', '40', '1.70m', '01-05-2014', 5, 2, '2014-11-05 16:28:04'),
+(2, 'arturito', 'Gomez', 'V-29.000.000', 8, 'N', '', '26', '1.5', '', 0, 3, '2014-11-27 15:45:26'),
+(4, 'Estevita', 'Orocopei', 'V-', 0, 'N', '', '', '', '', 0, 5, '2014-11-27 15:52:31'),
+(5, 'Pedrito', 'Martines', 'V-', 0, 'N', '', '', '', '', 0, 6, '2014-11-27 15:54:52'),
+(6, 'lunecito', 'lunecito', 'V-101', 30, 'N', '', '80', '1.70 M', '', 14, 7, '2014-12-04 10:25:48');
 
 -- --------------------------------------------------------
 
@@ -64,15 +67,15 @@ INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico
 -- Estructura de tabla para la tabla `auditoria`
 --
 
-DROP TABLE IF EXISTS `auditoria`;
 CREATE TABLE IF NOT EXISTS `auditoria` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `ip` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `valido` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` datetime NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fecha` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=148 ;
 
 --
 -- Truncar tablas antes de insertar `auditoria`
@@ -104,15 +107,33 @@ INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`) V
 (50, '', '', '127.0.0.1', '0', '2014-11-04 22:25:26'),
 (51, '', '', '127.0.0.1', '0', '2014-11-04 22:25:37'),
 (52, '', '', '127.0.0.1', '0', '2014-11-04 22:25:47'),
+(147, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.3.116', '1', '2014-12-04 15:49:35'),
+(146, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.3.116', '1', '2014-12-04 11:27:43'),
+(145, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.3.116', '1', '2014-12-04 08:23:18'),
+(144, 'julio899', '84099f59402528e431a11c7fd7e64f28', '192.168.3.116', '1', '2014-12-04 08:23:01'),
 (60, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 22:57:48'),
 (61, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 22:58:06'),
 (62, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 23:00:17'),
 (63, '', '', '127.0.0.1', '0', '2014-11-04 23:01:14'),
+(143, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.3.116', '1', '2014-12-04 08:22:45'),
+(142, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-03 15:36:30'),
+(141, 'julio899', '84099f59402528e431a11c7fd7e64f28', '127.0.0.1', '1', '2014-12-03 15:36:02'),
+(140, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:31:14'),
+(139, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:30:51'),
+(138, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:29:28'),
+(137, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:02:16'),
+(136, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-27 15:58:44'),
 (72, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 23:24:34'),
 (73, '', '', '127.0.0.1', '0', '2014-11-04 23:25:44'),
+(135, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-27 15:55:25'),
+(134, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 15:47:46'),
 (76, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 23:28:44'),
 (77, '', '', '127.0.0.1', '0', '2014-11-05 00:37:26'),
+(133, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 15:45:31'),
 (79, '', '', '127.0.0.1', '0', '2014-11-05 08:50:39'),
+(132, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:58:52'),
+(131, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:54:03'),
+(130, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:53:59'),
 (83, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 08:59:52'),
 (84, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:01:28'),
 (85, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:16:53'),
@@ -122,6 +143,10 @@ INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`) V
 (89, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:21:23'),
 (90, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:22:40'),
 (91, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:23:08'),
+(129, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:51:08'),
+(128, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:49:59'),
+(127, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:49:34'),
+(126, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-27 14:40:56'),
 (96, '', '', '127.0.0.1', '0', '2014-11-06 09:31:18'),
 (97, '', '', '127.0.0.1', '0', '2014-11-06 09:31:35'),
 (125, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 15:50:40'),
@@ -144,18 +169,50 @@ INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`) V
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `avance_integral`
+--
+
+CREATE TABLE IF NOT EXISTS `avance_integral` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `id_alumno` int(10) NOT NULL,
+  `cognitiva` text COLLATE utf8_spanish_ci NOT NULL,
+  `lenguage` text COLLATE utf8_spanish_ci NOT NULL,
+  `social` text COLLATE utf8_spanish_ci NOT NULL,
+  `afectiva` text COLLATE utf8_spanish_ci NOT NULL,
+  `motora` text COLLATE utf8_spanish_ci NOT NULL,
+  `sexual` text COLLATE utf8_spanish_ci NOT NULL,
+  `fisica` text COLLATE utf8_spanish_ci NOT NULL,
+  `moral` text COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Truncar tablas antes de insertar `avance_integral`
+--
+
+TRUNCATE TABLE `avance_integral`;
+--
+-- Volcado de datos para la tabla `avance_integral`
+--
+
+INSERT INTO `avance_integral` (`id`, `id_alumno`, `cognitiva`, `lenguage`, `social`, `afectiva`, `motora`, `sexual`, `fisica`, `moral`) VALUES
+(1, 5, 'cognitiva', 'leng', 'social', 'afectiva', 'moral', 'seu', 'fisi', 'moral');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `docentes`
 --
 
-DROP TABLE IF EXISTS `docentes`;
 CREATE TABLE IF NOT EXISTS `docentes` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `id_enlace` varchar(20) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_enlace` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Truncar tablas antes de insertar `docentes`
@@ -179,17 +236,18 @@ INSERT INTO `docentes` (`id`, `nombre`, `apellido`, `telefono`, `correo`, `id_en
 -- Estructura de tabla para la tabla `representanes`
 --
 
-DROP TABLE IF EXISTS `representanes`;
 CREATE TABLE IF NOT EXISTS `representanes` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cedula` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` text COLLATE utf8_spanish_ci NOT NULL,
-  `edad` int(5) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `edad` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cedula` (`cedula`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Truncar tablas antes de insertar `representanes`
@@ -201,7 +259,11 @@ TRUNCATE TABLE `representanes`;
 --
 
 INSERT INTO `representanes` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`, `correo`, `direccion`, `edad`) VALUES
-(2, 'RAMON', 'HERNANDEZs', 'V-19.000.000', '0414-14512355', 'R@gmail.com', 'calle', 25);
+(2, 'RAMON', 'HERNANDEZs', 'V-19.000.000', '0414-14512355', 'R@gmail.com', 'calle', 25),
+(3, 'arturo', 'gomez', 'V-14.000.001', '', '', '', 32),
+(5, 'Estevan', 'Orocopei', 'V-123441', '', '', '', 48),
+(6, 'Pedro', 'Martinez', 'V-4651752', '', '', '', 0),
+(7, 'lunes', 'lunes', 'V-100', '', '', '', 50);
 
 -- --------------------------------------------------------
 
@@ -209,16 +271,16 @@ INSERT INTO `representanes` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`,
 -- Estructura de tabla para la tabla `secciones`
 --
 
-DROP TABLE IF EXISTS `secciones`;
 CREATE TABLE IF NOT EXISTS `secciones` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `grado` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `seccion` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `year` varchar(7) COLLATE utf8_spanish_ci NOT NULL,
   `cap_alumnos` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `turno` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `id_docente` varchar(10) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_docente` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
 
 --
 -- Truncar tablas antes de insertar `secciones`
@@ -245,9 +307,8 @@ INSERT INTO `secciones` (`id`, `grado`, `seccion`, `year`, `cap_alumnos`, `turno
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `clave` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -255,8 +316,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `tipo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `secciones` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
   `turno` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
-  `id_enlace` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_enlace` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `usuario` (`usuario`),
+  UNIQUE KEY `id_enlace` (`id_enlace`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
 
 --
 -- Truncar tablas antes de insertar `usuarios`
@@ -281,80 +345,6 @@ INSERT INTO `usuarios` (`id`, `usuario`, `clave`, `nombre`, `apellido`, `tipo`, 
 (11, 'mariar', 'e50d9e9230021698fa7a4d82e1b86094', 'Maria', 'Rodriguez', 'D', '', '', 'e50d'),
 (12, 'jaivelis', '3630147a213aba59fbfc30119373898b', 'Jaivelis', 'Villegas', 'D', '', '', '3630');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `auditoria`
---
-ALTER TABLE `auditoria`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `docentes`
---
-ALTER TABLE `docentes`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `representanes`
---
-ALTER TABLE `representanes`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `cedula` (`cedula`);
-
---
--- Indices de la tabla `secciones`
---
-ALTER TABLE `secciones`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `usuario` (`usuario`), ADD UNIQUE KEY `id_enlace` (`id_enlace`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `auditoria`
---
-ALTER TABLE `auditoria`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=126;
---
--- AUTO_INCREMENT de la tabla `docentes`
---
-ALTER TABLE `docentes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT de la tabla `representanes`
---
-ALTER TABLE `representanes`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `secciones`
---
-ALTER TABLE `secciones`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

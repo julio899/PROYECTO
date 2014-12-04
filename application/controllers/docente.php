@@ -64,11 +64,16 @@ class Docente extends CI_Controller {
 				
 	} //fin de seleccionar_seccion
 	
-	function seccion_docente($id_seccion){
-		
 
+	function cargar_avance($id_alumno){
+		$this->load->model('data');
 
-	}//fin de seccion_docente
+		$this->session->set_flashdata('alumno_seleccionado',$this->data->traer_alumno($id_alumno));
+
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_docente',array('avance'=>TRUE,'alumno'=>$this->data->traer_alumno($id_alumno) ) );
+		$this->load->view('html/pie_pagina');
+	}//fin de cargar_avance
 
 	function cerrar_session(){
 			$this->session->sess_destroy();

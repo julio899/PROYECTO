@@ -726,7 +726,9 @@ class CI_Input {
 	*/
 	function _clean_input_keys($str)
 	{
-		if ( ! preg_match("/^[a-z0-9:_\/-]+$/i", $str))
+		//var_dump($str);
+		//if ( ! preg_match("/^[a-z0-9:_\/-]+$/i", $str))
+		if   ( ! preg_match("/^[a-z0-9:_\/\.\[\]-\|]+$/i", $str) )
 		{
 			exit('Disallowed Key Characters.');
 		}
@@ -736,7 +738,8 @@ class CI_Input {
 		{
 			$str = $this->uni->clean_string($str);
 		}
-
+		//if (getenv('ENVIRONMENT') && getenv('ENVIRONMENT') == 'DEVELOPMENT')
+        	//var_dump($str);
 		return $str;
 	}
 

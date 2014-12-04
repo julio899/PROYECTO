@@ -274,6 +274,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 							echo "  Grado : ".$secciones_docente[$i]['grado'];
 							echo "<br>Cantidad de Alumnos Inscritos:".count($seccion['alumnos']);
 							echo "  - CAPACIDAD DE [".$secciones_docente[$i]['cap_alumnos']."] ALUMNOS";
+							var_dump($seccion['alumnos']);
 						}			
 		}
 		echo "\n <br><hr>";
@@ -304,10 +305,10 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 		        	for ($a=0; $a < count($alumnos); $a++) { 
 		        		$btn_cargar_avance='<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cargar Avances" data-original-title="Cargar Avances"><span class="glyphicon glyphicon-export" aria-hidden="true"></span></button>';
 		        		$btn_actualizar='<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Actualizar Datos" data-original-title="Actualizar Datos"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>';
-		        		$btn_cambiar_de_seccion='<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cambiar de Seccion" data-original-title="Cambiar de Seccion"><span class="glyphicon glyphicon-random" aria-hidden="true"></span></button>';
+		        		$btn_cambiar_de_seccion='<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cambiar al Alumno de Seccion" data-original-title="Cambiar al Alumno de Seccion"><span class="glyphicon glyphicon-random" aria-hidden="true"></span></button>';
 		        		$btn_info_avances='<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Ver Avances" data-original-title="Ver Avances"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>';
 		        		# imprimimos cuerpo de tabla
-		        		echo "<tr><td>".($a+1)."</td><td>".strtoupper( $alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])."</td><td>".strtoupper($alumnos[$a]['representante'])."</td><td>".$alumnos[$a]['edad']."</td><td> <a href=\"#\"> $btn_cargar_avance </a>  <a href=\"#\"> $btn_actualizar </a>   <a href=\"#\"> $btn_cambiar_de_seccion </a>   <a href=\"#\"> $btn_info_avances </a> </td></tr>";
+		        		echo "<tr><td>".($a+1)."</td><td>".strtoupper( $alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])."</td><td>".strtoupper($alumnos[$a]['representante'])."</td><td>".$alumnos[$a]['edad']."</td><td> <a href=\"".base_url().index_page()."/docente/cargar_avance/".$alumnos[$a]['id']."\"> $btn_cargar_avance </a>  <a href=\"#\"> $btn_actualizar </a>   <a href=\"#\"> $btn_cambiar_de_seccion </a>   <a href=\"#\"> $btn_info_avances </a> </td></tr>";
 		        	}
 		        ?>
 		        </tbody>
