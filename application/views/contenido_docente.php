@@ -260,15 +260,56 @@ if($this->session->flashdata('error')): ?>
 
 
 <?php if($this->session->flashdata('selecciono_seccion')): 
-$seccionID=$this->session->flashdata('selecciono_seccion');
+$seccion=$this->session->flashdata('selecciono_seccion');
 $secciones_docente=$this->session->userdata('secciones_docente');
 ?>
 	<!--  si selecciona Una seccion especifica	-->
 	<div class="col-md-9 docs">
-		<pre>Selecciono la seccion <?php echo $seccionID;?></pre>
-		<p>
-			<?php var_dump($secciones_docente);?>
-		</p>
+		<pre>Selecciono la seccion <?php 
+		//echo $seccion['id']; 
+		for ($i=0; $i < count($secciones_docente); $i++) { 
+			if ($secciones_docente[$i]['id']==$seccion['id']) {
+							# Describimos la seccion
+							echo "<br>Secci&oacute;n : ".$secciones_docente[$i]['seccion'];
+							echo "  Grado : ".$secciones_docente[$i]['grado'];
+							echo "<br>Cantidad de Alumnos Inscritos:".count($seccion['alumnos']);
+							echo "  - CAPACIDAD DE [".$secciones_docente[$i]['cap_alumnos']."] ALUMNOS";
+						}			
+		}
+		echo "\n <br><hr>";
+		$alumnos=$seccion['alumnos'];
+
+		?></pre>
+				
+		<div class="panel panel-default">
+		      <!-- Default panel contents -->
+		      <div class="panel-heading">Listado de Alumnos</div>
+		      <div class="panel-body">
+		        <p>A continuacion se mustra la seccion seleccionada.</p>
+		      </div>
+
+		      <!-- Table -->
+		      <table class="table">
+		        <thead>
+		          <tr>
+		            <th>#</th>
+		            <th>Alumno</th>
+		            <th>Representante</th>
+		            <th>Edad</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		        <?php
+		        	for ($a=0; $a < count($alumnos); $a++) { 
+		        		# imprimimos cuerpo de tabla
+		        		echo "<tr><td>".($a+1)."</td><td>".strtoupper( $alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])."</td><td></td><td>".$alumnos[$a]['edad']."</td></tr>";
+		        	}
+		        ?>
+		        </tbody>
+		      </table>
+		    </div>
+
+
 	</div>
 	<!--  FIN de IF si selecciona Una seccion especifica	-->
 <?php endif;?>

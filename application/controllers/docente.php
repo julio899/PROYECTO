@@ -56,15 +56,16 @@ class Docente extends CI_Controller {
 	}//Verificamos si es un docente que entro
 
 	function seleccionar_seccion($secc_select=""){
-		$this->session->set_flashdata('selecciono_seccion',$secc_select);
+		$this->load->model('data');
+		$this->session->set_flashdata('selecciono_seccion', array('id' => $secc_select, 'alumnos'=>$this->data->traer_alumnos_inscritos($secc_select)) );
 		$this->load->view('html/cabecera');
 		$this->load->view('contenido_docente');
 		$this->load->view('html/pie_pagina');
 				
 	} //fin de seleccionar_seccion
 	
-	function seccion_docente(){
-		$this->load->model('data');
+	function seccion_docente($id_seccion){
+		
 
 
 	}//fin de seccion_docente

@@ -131,13 +131,32 @@ var $bandera=null;
 				'id_docente'=>$row->id_docente,
 				'nombre_docente'=>$this->traer_nombre_docente($row->id_docente)
 				);
-		}
+		}//fin del foreach
 		return $this->temporal;
 
 	}//fin de traer_secciones
 
 	function traer_alumnos_inscritos($id_seccion=""){
-		$sql="SELECT * FROM `alumnos` WHERE `id_seccion` =$id_seccion";
+		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id_seccion` =$id_seccion");
+		$this->temporal2=null;
+			//recorro los datos y los ingreso en un array
+				foreach ($query->result() as $row) {
+					$this->temporal2[]=array(
+												'nombres'=>$row->nombres,
+												'apellidos'=>$row->apellidos,
+												'cedula'=>$row->cedula,
+												'edad'=>$row->edad,
+												'alergico'=>$row->alergico,
+												'descripcion_alergia'=>$row->descripcion_alergia,
+												'peso'=>$row->peso,
+												'altura'=>$row->altura,
+												'id_seccion'=>$row->id_seccion,
+												'id_representante'=>$row->id_representante
+
+												);
+				}//fin del foreach
+
+		return $this->temporal2;
 	}
 
 	function traer_nombre_docente($enlace=""){
@@ -163,7 +182,7 @@ var $bandera=null;
 					}//cirre foreach
 
 
-					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcon_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representane`, `fecha_inscripcion`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW());")){
+					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcon_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW());")){
 						$this->bandera=true;
 					}else{
 						$this->bandera=false;
@@ -245,7 +264,7 @@ var $bandera=null;
 	}
 
 	function representantes(){
-		//$query=$this->db->query("SELECT `representanes`.`nombres`,`representanes`.`apellidos`,`representanes`.`cedula`,`representanes`.`telefono`,`representanes`.`correo`,`representanes`.`direccion`,`alumnos`.`id` FROM `representanes`,`alumnos` WHERE `representanes`.`id`=`alumnos`.`id_representane`");
+		//$query=$this->db->query("SELECT `representanes`.`nombres`,`representanes`.`apellidos`,`representanes`.`cedula`,`representanes`.`telefono`,`representanes`.`correo`,`representanes`.`direccion`,`alumnos`.`id` FROM `representanes`,`alumnos` WHERE `representanes`.`id`=`alumnos`.`id_representante`");
 		$query=$this->db->query("SELECT * FROM `representanes`");
 		$this->temporal2=null;
 
