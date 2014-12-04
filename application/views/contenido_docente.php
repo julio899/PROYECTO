@@ -259,16 +259,23 @@ if($this->session->flashdata('error')): ?>
 
 
 
+<?php if($this->session->flashdata('selecciono_seccion')): 
+$seccionID=$this->session->flashdata('selecciono_seccion');
+$secciones_docente=$this->session->userdata('secciones_docente');
+?>
+	<!--  si selecciona Una seccion especifica	-->
+	<div class="col-md-9 docs">
+		<pre>Selecciono la seccion <?php echo $seccionID;?></pre>
+		<p>
+			<?php var_dump($secciones_docente);?>
+		</p>
+	</div>
+	<!--  FIN de IF si selecciona Una seccion especifica	-->
+<?php endif;?>
 
 
 
-
-
-
-
-
-
-<?php if(!$this->session->flashdata('registroAlumno')):?>
+<?php if(!$this->session->flashdata('registroAlumno') && !$this->session->flashdata('selecciono_seccion') ):?>
 			<!-- Contenido Central -->
 			<div class="col-md-9 docs">
 						<h1 id="getting-started">Bienvenido <?php echo $usuario['nombre_completo'];?> al panel del Docente</h1>
@@ -288,7 +295,7 @@ if($this->session->flashdata('error')): ?>
 						        			$secciones=$this->session->userdata('secciones_docente');
 						        			for ($i=0; $i < count($secciones); $i++) { 
 						        				# Imprimo Las Secciones
-						        				echo '<a href="" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
+						        				echo '<a href="'.base_url().index_page().'/docente/seleccionar_seccion/'.$secciones[$i]['id'].'" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
 						        			}
 						        	?>
 								      <!-- Texto de muestra <a href="#" class="list-group-item active">

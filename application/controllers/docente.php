@@ -55,11 +55,19 @@ class Docente extends CI_Controller {
 		}
 	}//Verificamos si es un docente que entro
 
-	function secciones_docente(){
+	function seleccionar_seccion($secc_select=""){
+		$this->session->set_flashdata('selecciono_seccion',$secc_select);
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_docente');
+		$this->load->view('html/pie_pagina');
+				
+	} //fin de seleccionar_seccion
+	
+	function seccion_docente(){
 		$this->load->model('data');
 
 
-	}//Verificamos si es un docente que entro
+	}//fin de seccion_docente
 
 	function cerrar_session(){
 			$this->session->sess_destroy();

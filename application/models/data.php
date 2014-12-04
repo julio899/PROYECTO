@@ -136,6 +136,10 @@ var $bandera=null;
 
 	}//fin de traer_secciones
 
+	function traer_alumnos_inscritos($id_seccion=""){
+		$sql="SELECT * FROM `alumnos` WHERE `id_seccion` =$id_seccion";
+	}
+
 	function traer_nombre_docente($enlace=""){
 		$query=$this->db->query("SELECT * FROM `docentes` WHERE `id_enlace` LIKE '$enlace'");
 		$this->temporal2=null;
