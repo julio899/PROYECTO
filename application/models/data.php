@@ -138,10 +138,11 @@ var $bandera=null;
 
 	function traer_alumnos_inscritos($id_seccion=""){
 		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id_seccion` =$id_seccion");
-		$this->temporal2=null;
+		$this->temporal=null;
 			//recorro los datos y los ingreso en un array
 				foreach ($query->result() as $row) {
-					$this->temporal2[]=array(
+					$representante=$this->traer_nombre_representante_id($row->id_representante);
+					$this->temporal [] =array(
 												'nombres'=>$row->nombres,
 												'apellidos'=>$row->apellidos,
 												'cedula'=>$row->cedula,
@@ -151,12 +152,13 @@ var $bandera=null;
 												'peso'=>$row->peso,
 												'altura'=>$row->altura,
 												'id_seccion'=>$row->id_seccion,
-												'id_representante'=>$row->id_representante
+												'id_representante'=>$row->id_representante,
+												'representante'=>$representante
 
 												);
 				}//fin del foreach
 
-		return $this->temporal2;
+		return $this->temporal;
 	}
 
 	function traer_nombre_docente($enlace=""){
@@ -164,6 +166,16 @@ var $bandera=null;
 		$this->temporal2=null;
 		foreach ($query->result() as $row) {
 			$this->temporal2=$row->nombre." ".$row->apellido;
+		}
+		return $this->temporal2;
+	}
+
+
+	function traer_nombre_representante_id($id=""){
+		$query=$this->db->query("SELECT * FROM `representanes` WHERE `id` = '$id'");
+		$this->temporal2=null;
+		foreach ($query->result() as $row) {
+			$this->temporal2=$row->nombres." ".$row->apellidos;
 		}
 		return $this->temporal2;
 	}
