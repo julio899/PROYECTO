@@ -274,7 +274,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 							echo "  Grado : ".$secciones_docente[$i]['grado'];
 							echo "<br>Cantidad de Alumnos Inscritos:".count($seccion['alumnos']);
 							echo "  - CAPACIDAD DE [".$secciones_docente[$i]['cap_alumnos']."] ALUMNOS";
-							var_dump($seccion['alumnos']);
+							//var_dump($seccion['alumnos']);
 						}			
 		}
 		echo "\n <br><hr>";

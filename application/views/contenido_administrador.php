@@ -411,7 +411,7 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 <!-- Inicio del Contenido EN CASO QUE NO HAYA QUE REGISTRAR ALUMNO-->
 
 	<div class="col-md-9 docs">
-				<h1 id="getting-started">Bienvenido <strong><?php echo $this->session->userdata('datos_usuarios')['usuario'];?></strong> al panel del Administrador</h1>
+				<h1 id="getting-started">Bienvenido <strong><?php $usu=$this->session->userdata('datos_usuarios'); echo $usu['usuario'];?></strong> al panel del Administrador</h1>
 					<p>Texto de introduccion algo que pueda ser  <code>&lt;Relevante&gt;</code> en esta seccion.</p>
 				
 						En este Proyecto fue desarrollado en PHP y se usaron herramientas OpenSource.<br>

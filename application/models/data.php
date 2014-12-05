@@ -186,7 +186,7 @@ var $bandera=null;
 		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id` = '$id'");
 		$this->temporal=null;
 		foreach ($query->result() as $row) {
-			$seccion_grado=traer_seccion_grado($row->id_seccion);
+			$seccion_grado=$this->traer_seccion_grado($row->id_seccion);
 			$this->temporal = array(
 								'id' => $row->id,
 								'nombres' => $row->nombres,
