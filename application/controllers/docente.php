@@ -77,6 +77,6 @@ class Docente extends CI_Controller {
 
 	function cerrar_session(){
 			$this->session->sess_destroy();
-			redirect('inicio','refreh');
+			redirect('','refreh');
 	}//fin de cerrar_session
 }

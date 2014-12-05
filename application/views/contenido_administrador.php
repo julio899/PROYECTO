@@ -65,7 +65,13 @@
 					  Mensajes <span class="badge">4</span>
 					</button></li>
 				</ul>
+
+				<div class="baner forml-control">
+					<p>Instituto de Educación Especial Nacional Bolivariano “RÓMULO GALLEGOS"</p>
+				</div>
+
 			</div>
+
 
 
 <!-- EN CASO DE REGISTRO DE ESTUDIANTE SE MOSTRARA ESTA PARTE -->	
@@ -411,6 +417,8 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 <!-- Inicio del Contenido EN CASO QUE NO HAYA QUE REGISTRAR ALUMNO-->
 
 	<div class="col-md-9 docs">
+
+
 				<h1 id="getting-started">Bienvenido <strong><?php $usu=$this->session->userdata('datos_usuarios'); echo $usu['usuario'];?></strong> al panel del Administrador</h1>
 					<p>Texto de introduccion algo que pueda ser  <code>&lt;Relevante&gt;</code> en esta seccion.</p>
 				
@@ -438,6 +446,21 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 <?php endif;?>
 
 
-		</div>
+		</div> <!-- fin del row del contenedor central-->
+<!-- slider
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+
+				<div id="slides">
+				    <img src="<?php echo base_url();?>img/especial/0.jpg">
+				    <img src="<?php echo base_url();?>img/especial/1.jpg">
+				    <img src="<?php echo base_url();?>img/especial/2.jpg">
+				    <img src="<?php echo base_url();?>img/especial/3.jpg">
+				    <img src="<?php echo base_url();?>img/especial/3.png">
+				</div>
+
+			</div>
+		</div> -->
 
 	</div>

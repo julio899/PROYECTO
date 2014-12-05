@@ -60,6 +60,10 @@ if($this->session->flashdata('error')): ?>
 					  Mensajes <span class="badge">0</span>
 					</button></li>
 				</ul>
+				
+				<div class="baner forml-control">
+					<p>Instituto de Educación Especial Nacional Bolivariano “RÓMULO GALLEGOS"</p>
+				</div>
 			</div>
 		<!-- FIN Barra Lateral -->
 

@@ -9,6 +9,7 @@ var $datos=null;
 	public function index()
 	{
 		$this->load->view('Ingreso');
+		
 	}
 
 

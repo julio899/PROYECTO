@@ -7,6 +7,7 @@
 	<!-- Archivos JS -->
 	<script src="<?php echo base_url()."js/jquery-1.11.1.min.js";?>"></script>
 	<script src="<?php echo base_url()."js/bootstrap.js";?>"></script>
+	<script src="<?php echo base_url()."js/jquery.slides.min.js";?>"></script>
 <style>
 div.espacio{
 	height: 10em;
@@ -96,7 +97,92 @@ border-radius: 3px;
 .bs-callout-warning {
 border-left-color: #f0ad4e;
 }
+
+   /* Prevents slides from flashing */
+    #slides {
+      display:none;
+    }
+
+
+    #slides .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    #slides .slidesjs-previous {
+      margin-right: 5px;
+      float: left;
+    }
+
+    #slides .slidesjs-next {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url("../img/pagination.png");
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    #slides a:link,
+    #slides a:visited {
+      color: #333
+    }
+
+    #slides a:hover,
+    #slides a:active {
+      color: #9e2020
+    }
+div.baner{
+	margin-top: 10px;
+	padding-top: 10px;
+	width:263px;
+	height: 540px;
+	background-image: url("<?php echo base_url();?>img/especial/baner.jpg");
+}
+div.baner>p{
+	color: white;
+	font-family: impact;
+	margin-left: 10px;
+	margin-right: 5px;
+	text-align: center;
+	font-size: 1.5em; 
+}
 </style>
+
+  <script>
+	    $(function(){
+	      $("#slides").slidesjs({
+	        width: 470,
+	        height: 264
+	      });
+	    });
+  </script>
 </head>
 <body>
 

@@ -4,10 +4,11 @@
 	<meta charset="utf-8">
 	<title>Proyecto</title>
 	<link rel="stylesheet" href="<?php echo base_url()."/css/bootstrap.css";?>">
-	
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery.slides.min.js"></script>
 <style>
 div.espacio{
-	height: 4em;
+	height: 1em;
 }
 .izq{
 	text-align: left;
@@ -67,7 +68,99 @@ p.text-right>a{
 height: 57px;
 width: 222px;
 }
+body{
+background-color: transparent;
+background-image: url('img/bg2.jpg');
+
+}
+div#content{
+	box-shadow: 1px 1px 5px #354859;
+}
+
+   /* Prevents slides from flashing */
+    #slides {
+      display:none;
+    }
+
+
+    #slides .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    #slides .slidesjs-previous {
+      margin-right: 5px;
+      float: left;
+    }
+
+    #slides .slidesjs-next {
+      margin-right: 5px;
+      float: left;
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url("img/pagination.png");
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    #slides a:link,
+    #slides a:visited {
+      color: #333
+    }
+
+    #slides a:hover,
+    #slides a:active {
+      color: #9e2020
+    }
+
+div.jumbotron{
+	padding-top: 5px;
+}
+h1.titulo{
+	font-size: 1.5em;
+}
+h1.titulo>strong{
+	font-size: 0.7em;
+	font-style:oblique;
+}
+strong.txt-white{
+	color: white;
+}
 </style>
+
+  <script>
+    $(function(){
+      $("#slides").slidesjs({
+        width: 470,
+        height: 264
+      });
+    });
+  </script>
 </head>
 <body>
 <div class="bs-header" id="content">
@@ -83,14 +176,24 @@ width: 222px;
 		<div class="row-fluid">
 			<div class="col-md-8">
 				<div class="jumbotron">
-					<h1>Bienvenidos</h1>
-					<p><pre>Aplicaci&oacute;n Tecnologica</pre> <p class="">INSTITUTO DE EDUCACIÓN ESPECIAL NACIONAL BOLIVARIANO “RÓMULO GALLEGOS"</p></p>
+					<h1 class="titulo">Bienvenidos al instituto de educación especial nacional bolivariano <strong>“RÓMULO GALLEGOS"</strong></h1>
+						<p><pre>Aplicaci&oacute;n Tecnologica</pre> 
+								<div id="slides">
+								    <img src="<?php echo base_url();?>img/especial/0.jpg">
+								    <img src="<?php echo base_url();?>img/especial/1.jpg">
+								    <img src="<?php echo base_url();?>img/especial/2.jpg">
+								    <img src="<?php echo base_url();?>img/especial/3.jpg">
+								    <img src="<?php echo base_url();?>img/especial/3.png">
+								</div>
+						</p>
 					<p><a href="#" class="btn btn-primary">Leer noticias en el portal</a></p>
+
 				</div>
 
 			</div>
 			
 			<div class="col-md-4">
+
 				<!-- Identificacion -->
 				<div class="thumbnail login-marco">
 
@@ -118,10 +221,11 @@ width: 222px;
 				<!-- Fin de identificacion-->
 				<div class="row-fluid">
 					<pre>Desarrolladores</pre>
-						<div class="col-md-12">Kelvin Navas CI: 16.690.872</div>
-						<div class="col-md-12">Miguel Díaz CI: 19.472.360</div>
-						<div class="col-md-12">Rainny González CI: 20.452.749</div>
+						<div class="col-md-12"><strong class="txt-white">Kelvin Navas CI: 16.690.872</strong></div>
+						<div class="col-md-12"><strong class="txt-white">Miguel Díaz CI: 19.472.360</strong></div>
+						<div class="col-md-12"><strong class="txt-white">Rainny González CI: 20.452.749</strong></div>
 				</div>
+
 			</div>
 		</div>
 
