@@ -295,33 +295,33 @@ if(isset($avance)):
 
 					  <div class="form-group">
 					  	<label from="afectiva">Afectiva:</label>
-					  	<textarea name="afectiva" id="afectiva" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  	<textarea name="afectiva" id="afectiva" class="form-control" placeholder="Detalle su Descripci&oacute;n con las caracteristicas para esta area" rows="3"></textarea>
 					  </div>
 
 
 					  <div class="form-group">
 					  	<label from="motora">Motora:</label>
-					  	<textarea name="motora" id="motora" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  	<textarea name="motora" id="motora" class="form-control" placeholder="Detalle su Descripci&oacute;n con las caracteristicas para esta area" rows="3"></textarea>
 					  </div>
 
 
 					  <div class="form-group">
 					  	<label from="sexual">Sexual:</label>
-					  	<textarea name="sexual" id="sexual" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  	<textarea name="sexual" id="sexual" class="form-control" placeholder="Detalle su Descripci&oacute;n con las caracteristicas para esta area" rows="3"></textarea>
 					  </div>
 
 
 					  <div class="form-group">
 					  	<label from="fisica">Fisica:</label>
-					  	<textarea name="fisica" id="fisica" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  	<textarea name="fisica" id="fisica" class="form-control" placeholder="Detalle su Descripci&oacute;n con las caracteristicas para esta area" rows="3"></textarea>
 					  </div>
 
 
 					  <div class="form-group">
 					  	<label from="moral">Moral:</label>
-					  	<textarea name="moral" id="moral" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  	<textarea name="moral" id="moral" class="form-control" placeholder="Detalle su Descripci&oacute;n con las caracteristicas para esta area" rows="3"></textarea>
 					  </div>
-					  <button type="submit" class="btn btn-primary">Cargar</button>
+					  <button type="submit" class="btn btn-primary btn-lg">Cargar</button>
 					</form>
 				</div>
 				

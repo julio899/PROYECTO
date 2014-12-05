@@ -181,6 +181,7 @@ div.maquina{
 -o-background-size: cover;
 background-size: cover;
 	opacity: 1;
+	padding-bottom: 10px;
 }
 </style>
 
