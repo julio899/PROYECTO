@@ -252,7 +252,7 @@ var $bandera=null;
 	}//reg_alumno
 
 	function reg_avance_integral($avance=""){
-			$sql="INSERT INTO `proyecto`.`avance_integral` ( `id` , `id_alumno` , `enlace_docente`, `cognitiva` , `lenguage` , `social` , `afectiva` , `motora` , `sexual` , `fisica` , `moral`) VALUES ( NULL, '".$avance['id_alumno']."','".$avance['id_enlace_docente']."' , '".$avance['cognitiva']."', '".$avance['lenguaje']."', '".$avance['social']."', '".$avance['afectiva']."', '".$avance['motora']."', '".$avance['sexual']."', '".$avance['fisica']."', '".$avance['moral']."' );";
+			$sql="INSERT INTO `proyecto`.`avance_integral` ( `id` , `id_alumno` , `enlace_docente`, `cognitiva` , `lenguage` , `social` , `afectiva` , `motora` , `sexual` , `fisica` , `moral`, `fecha`) VALUES ( NULL, '".$avance['id_alumno']."','".$avance['id_enlace_docente']."' , '".$avance['cognitiva']."', '".$avance['lenguaje']."', '".$avance['social']."', '".$avance['afectiva']."', '".$avance['motora']."', '".$avance['sexual']."', '".$avance['fisica']."', '".$avance['moral']."', NOW() );";
 			if ($this->db->query($sql)) {
 				return TRUE;
 			}else{

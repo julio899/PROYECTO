@@ -81,7 +81,7 @@ class Docente extends CI_Controller {
 	function registrar_avance(){
 		$this->load->model('data');
 		if($this->data->reg_avance_integral($this->input->post()) ){
-			$this->session->set_flashdata('ok','AVANCE DEL ALUMNO REGISTRADO COMPLETADO SATISFACTORIAMENTE');
+			$this->session->set_flashdata('ok','AVANCE DEL ALUMNO REGISTRADO SATISFACTORIAMENTE');
 		}else{
 			$this->session->set_flashdata('error','No se pudo registrar el Avance');
 		}

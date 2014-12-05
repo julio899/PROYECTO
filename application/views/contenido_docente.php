@@ -269,7 +269,6 @@ if(isset($avance)):
 		    <p>En este modulo usted Puede Cargar <code>Los Avances en Distintas areas del alumno</code> .</p>
 		 	<pre>Alumno: <?php echo strtoupper($alumno['nombres'].' '.$alumno['apellidos']); ?>
 		 		<br>Cedula: <?php echo $alumno['cedula'].'   Edad:'.$alumno['edad'].'  Seccion: '.$alumno['seccion'].'  Grado:'.$alumno['grado'];?> 
-			$avance: <?php //var_dump($usuario);?>
 			</pre>
 
 			<div class="row-fluid">
@@ -353,15 +352,13 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 							# Describimos la seccion
 							echo "<br>Secci&oacute;n : ".$secciones_docente[$i]['seccion'];
 							echo "  Grado : ".$secciones_docente[$i]['grado'];
-							echo "<br>Cantidad de Alumnos Inscritos:".count($seccion['alumnos']);
+							echo "<br>Cantidad de Alumnos Inscritos: <span class=\"label label-info\">".count($seccion['alumnos'])."</span>";
 							echo "  - CAPACIDAD DE [".$secciones_docente[$i]['cap_alumnos']."] ALUMNOS";
 							//var_dump($seccion['alumnos']);
 						}			
 		}
-		echo "\n <br><hr>";
-		$alumnos=$seccion['alumnos'];
-
-		?></pre>
+		$alumnos=$seccion['alumnos'];?>
+		</pre>
 				
 		<div class="panel panel-success">
 		      <!-- Default panel contents -->
