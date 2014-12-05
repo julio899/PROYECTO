@@ -173,6 +173,15 @@ div.baner>p{
 	text-align: center;
 	font-size: 1.5em; 
 }
+div.maquina{
+	color:#fff;
+	background: url("<?php echo base_url();?>img/bg3.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+	opacity: 1;
+}
 </style>
 
   <script>

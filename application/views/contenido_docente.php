@@ -60,7 +60,7 @@ if($this->session->flashdata('error')): ?>
 					  Mensajes <span class="badge">0</span>
 					</button></li>
 				</ul>
-				
+
 				<div class="baner forml-control">
 					<p>Instituto de Educación Especial Nacional Bolivariano “RÓMULO GALLEGOS"</p>
 				</div>
@@ -263,7 +263,7 @@ if($this->session->flashdata('error')): ?>
 <?php 
 if(isset($avance)):
 ?>
-<div class="col-md-9 docs">
+<div class="col-md-9 docs maquina">
 		<div class="bs-callout bs-callout-warning">
 		    <h4>Carga de Avances del alumno</h4>
 		    <p>En este modulo usted Puede Cargar <code>Los Avances en Distintas areas del alumno</code> .</p>
