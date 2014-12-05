@@ -58,9 +58,7 @@ class Docente extends CI_Controller {
 	function seleccionar_seccion($secc_select=""){
 		$this->load->model('data');
 		$this->session->set_flashdata('selecciono_seccion', array('id' => $secc_select, 'alumnos'=>$this->data->traer_alumnos_inscritos($secc_select)) );
-		$this->load->view('html/cabecera');
-		$this->load->view('contenido_docente');
-		$this->load->view('html/pie_pagina');
+		redirect('docente','refreh');
 				
 	} //fin de seleccionar_seccion
 	
@@ -79,4 +77,15 @@ class Docente extends CI_Controller {
 			$this->session->sess_destroy();
 			redirect('','refreh');
 	}//fin de cerrar_session
+
+	function registrar_avance(){
+		$this->load->model('data');
+		if($this->data->reg_avance_integral($this->input->post()) ){
+			$this->session->set_flashdata('ok','AVANCE DEL ALUMNO REGISTRADO COMPLETADO SATISFACTORIAMENTE');
+		}else{
+			$this->session->set_flashdata('error','No se pudo registrar el Avance');
+		}
+
+		redirect('docente','refreh');
+	}
 }

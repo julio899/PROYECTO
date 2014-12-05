@@ -269,11 +269,14 @@ if(isset($avance)):
 		    <p>En este modulo usted Puede Cargar <code>Los Avances en Distintas areas del alumno</code> .</p>
 		 	<pre>Alumno: <?php echo strtoupper($alumno['nombres'].' '.$alumno['apellidos']); ?>
 		 		<br>Cedula: <?php echo $alumno['cedula'].'   Edad:'.$alumno['edad'].'  Seccion: '.$alumno['seccion'].'  Grado:'.$alumno['grado'];?> 
+			$avance: <?php //var_dump($usuario);?>
 			</pre>
 
 			<div class="row-fluid">
 				<div class="col-md-12">
-					<form class="" >
+					<form class="form-horizontal" method="post" action="<?php echo base_url().index_page().'/docente/registrar_avance';?>" >
+					<input type="hidden" name="id_alumno" value="<?php echo $alumno['id'];?>">
+					<input type="hidden" name="id_enlace_docente" value="<?php echo $usuario['id_enlace'];?>">
 						<h3>Areas del Desarrollo de la Personalidad</h3>
 					  <div class="form-group">
 					  	<label from="cognitiva">Cognitiva:</label>

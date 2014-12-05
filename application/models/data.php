@@ -251,23 +251,15 @@ var $bandera=null;
 
 	}//reg_alumno
 
-	function reg_avance_integral($avance){
-		$sql="INSERT INTO `proyecto`.`avance_integral` (
-`id` ,
-`id_alumno` ,
-`cognitiva` ,
-`lenguage` ,
-`social` ,
-`afectiva` ,
-`motora` ,
-`sexual` ,
-`fisica` ,
-`moral`
-)
-VALUES (
-NULL, '5', 'cognitiva', 'leng', 'social', 'afectiva', 'moral', 'seu', 'fisi', 'moral'
-);";
-	}//
+	function reg_avance_integral($avance=""){
+			$sql="INSERT INTO `proyecto`.`avance_integral` ( `id` , `id_alumno` , `enlace_docente`, `cognitiva` , `lenguage` , `social` , `afectiva` , `motora` , `sexual` , `fisica` , `moral`) VALUES ( NULL, '".$avance['id_alumno']."','".$avance['id_enlace_docente']."' , '".$avance['cognitiva']."', '".$avance['lenguaje']."', '".$avance['social']."', '".$avance['afectiva']."', '".$avance['motora']."', '".$avance['sexual']."', '".$avance['fisica']."', '".$avance['moral']."' );";
+			if ($this->db->query($sql)) {
+				return TRUE;
+			}else{
+				return FALSE;
+			}
+
+	}// fin de reg_avance_integral
 
 	function traer_docente($id=""){
 		$query=$this->db->query("SELECT * FROM `docentes` WHERE `id` LIKE '$id'");
