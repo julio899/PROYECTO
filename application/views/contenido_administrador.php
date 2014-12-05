@@ -429,7 +429,7 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 				<p>Luego agregaremos y crearemos contnido dinamico.</p>
 				<h4>Datos de la session <code>Estamos verificando que todo cargo correctamente</code> </h4>
 					<pre>
-						<?php var_dump($this->session->userdata);?>
+						<?php //var_dump($this->session->userdata);?>
 					</pre>
 					<p class="alert alert-success">Conexiones Funcionando a la Perfeccion. . .</p>
 
