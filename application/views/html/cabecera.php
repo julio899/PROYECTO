@@ -86,6 +86,16 @@ p.text-right>a{
 	font-style: oblique;
 	font-size: 1em;
 }
+.bs-callout {
+padding: 20px;
+margin: 20px 0;
+border: 1px solid #eee;
+border-left-width: 5px;
+border-radius: 3px;
+}
+.bs-callout-warning {
+border-left-color: #f0ad4e;
+}
 </style>
 </head>
 <body>

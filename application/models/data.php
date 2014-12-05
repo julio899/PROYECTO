@@ -186,7 +186,7 @@ var $bandera=null;
 		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id` = '$id'");
 		$this->temporal=null;
 		foreach ($query->result() as $row) {
-			$seccion_grado=traer_seccion_grado($row->id_seccion);
+			$seccion_grado=$this->traer_seccion_grado($row->id_seccion);
 			$this->temporal = array(
 								'id' => $row->id,
 								'nombres' => $row->nombres,
@@ -232,7 +232,7 @@ var $bandera=null;
 					}//cirre foreach
 
 
-					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcon_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW());")){
+					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW());")){
 						$this->bandera=true;
 					}else{
 						$this->bandera=false;

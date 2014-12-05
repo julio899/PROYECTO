@@ -256,10 +256,84 @@ if($this->session->flashdata('error')): ?>
 <!-- <<<<  FIN DE REGISTRO DE ESTUDIANTE -->
 
 
+<?php 
+if(isset($avance)):
+?>
+<div class="col-md-9 docs">
+		<div class="bs-callout bs-callout-warning">
+		    <h4>Carga de Avances del alumno</h4>
+		    <p>En este modulo usted Puede Cargar <code>Los Avances en Distintas areas del alumno</code> .</p>
+		 	<pre>Alumno: <?php echo strtoupper($alumno['nombres'].' '.$alumno['apellidos']); ?>
+		 		<br>Cedula: <?php echo $alumno['cedula'].'   Edad:'.$alumno['edad'].'  Seccion: '.$alumno['seccion'].'  Grado:'.$alumno['grado'];?> 
+			</pre>
+
+			<div class="row-fluid">
+				<div class="col-md-12">
+					<form class="" >
+						<h3>Areas del Desarrollo de la Personalidad</h3>
+					  <div class="form-group">
+					  	<label from="cognitiva">Cognitiva:</label>
+					  	<textarea name="cognitiva" id="cognitiva" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
 
 
+					  <div class="form-group">
+					  	<label from="lenguaje">Lenguaje:</label>
+					  	<textarea name="lenguaje" id="lenguaje" class="form-control" placeholder="Conversar, Leer Escribir" rows="3"></textarea>
+					  </div>
 
-<?php if($this->session->flashdata('selecciono_seccion')): 
+
+					  <div class="form-group">
+					  	<label from="social">Social:</label>
+					  	<textarea name="social" id="social" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
+
+
+					  <div class="form-group">
+					  	<label from="afectiva">Afectiva:</label>
+					  	<textarea name="afectiva" id="afectiva" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
+
+
+					  <div class="form-group">
+					  	<label from="motora">Motora:</label>
+					  	<textarea name="motora" id="motora" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
+
+
+					  <div class="form-group">
+					  	<label from="sexual">Sexual:</label>
+					  	<textarea name="sexual" id="sexual" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
+
+
+					  <div class="form-group">
+					  	<label from="fisica">Fisica:</label>
+					  	<textarea name="fisica" id="fisica" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
+
+
+					  <div class="form-group">
+					  	<label from="moral">Moral:</label>
+					  	<textarea name="moral" id="moral" class="form-control" placeholder="Describa el Pensamiento Logico, matematico, creativo, solucion de problemas, pensamiento critico y afectivo" rows="3"></textarea>
+					  </div>
+					  <button type="submit" class="btn btn-primary">Cargar</button>
+					</form>
+				</div>
+				
+			</div>
+
+		 </div>
+ </div>
+
+
+<?php	
+// en caso de cargar los avances
+ endif;
+?>
+
+<?php 
+if($this->session->flashdata('selecciono_seccion') && !isset($avance)): 
 $seccion=$this->session->flashdata('selecciono_seccion');
 $secciones_docente=$this->session->userdata('secciones_docente');
 ?>
@@ -274,7 +348,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 							echo "  Grado : ".$secciones_docente[$i]['grado'];
 							echo "<br>Cantidad de Alumnos Inscritos:".count($seccion['alumnos']);
 							echo "  - CAPACIDAD DE [".$secciones_docente[$i]['cap_alumnos']."] ALUMNOS";
-							var_dump($seccion['alumnos']);
+							//var_dump($seccion['alumnos']);
 						}			
 		}
 		echo "\n <br><hr>";
@@ -326,7 +400,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 
 
 
-<?php if(!$this->session->flashdata('registroAlumno') && !$this->session->flashdata('selecciono_seccion') ):?>
+<?php if(!$this->session->flashdata('registroAlumno') && !$this->session->flashdata('selecciono_seccion') && !isset($avance) ):?>
 			<!-- Contenido Central -->
 			<div class="col-md-9 docs">
 						<h1 id="getting-started">Bienvenido <?php echo $usuario['nombre_completo'];?> al panel del Docente</h1>
