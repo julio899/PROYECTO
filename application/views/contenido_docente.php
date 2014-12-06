@@ -55,7 +55,6 @@ if($this->session->flashdata('error')): ?>
 					<li class="active"><a href="">OPCIONES</a></li>
 					<li><a href="<?php echo base_url().index_page().'/docente/registro_alumno'; ?>">Registro de Alumno</a></li>
 					<li><a href="<?php echo base_url().index_page().'/docente/'; ?>">Mis Secciones</a></li>
-					<li><a href="<?php echo base_url().index_page().'/docente/'; ?>">Cargar Avances</a></li>
 					<li><button class="btn btn-info form-control" type="button">
 					  Mensajes <span class="badge">0</span>
 					</button></li>
@@ -380,10 +379,84 @@ if(isset($avance)):
 												<?php //var_dump($avance_alumno);
 														for ($i=0; $i < count($avance_alumno); $i++) { 
 															//echo "<tr><td>".($i+1)."</td><td>Mark</td><td>".$avance_alumno[$i]['fecha']."</td><td> <button class=\"btn btn-success\">Ver</button> </td></tr>";
-															echo '<a href="#" class="list-group-item"><p class="list-group-item-text">#Nro. '.($i+1).'  -	 Fecha: 	<span class="label label-info"> '.$avance_alumno[$i]['fecha'].' </span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button class="btn btn-success">Ver  <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> </p></a>';
+															echo '<p>#Nro. '.($i+1).'  -	 Fecha: 	<span class="label label-info"> '.$avance_alumno[$i]['fecha'].' </span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button class="btn btn-success" data-toggle="modal" data-target="#avance-'.$avance_alumno[$i]['id'].'">Ver  <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> </p>';
+															// modal para mostrar despues
+																echo "<div id=\"avance-".$avance_alumno[$i]['id']."\" class=\"modal fade avance-".$avance_alumno[$i]['id']."\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">
+																	  <div class=\"modal-dialog modal-lg\">
+																	    <div class=\"modal-content maquina av-modal\">
+																	      	
+
+																	      	<div class=\"modal-header\">
+																	      	    <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>
+																	      	    <div class=\"bs-callout bs-callout-warning\">
+																	      	    	<h4 class=\"modal-title\" id=\"myModalLabel\">Descripci&oacute;n del Avance</h4>
+																	      	    </div>
+																	      	</div>
+
+																	      	<div class=\"modal-body\">
+																	      		<form class=\"form-horizontal\" method=\"post\" action=\"?\">
+																				<h3>Areas del Desarrollo de la Personalidad</h3>
+																					  <div class=\"form-group\">
+																					  	<label from=\"cognitiva\">Cognitiva:</label>
+																					  	<textarea readonly name=\"cognitiva\" id=\"cognitiva\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['cognitiva']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"lenguaje\">Lenguaje:</label>
+																					  	<textarea readonly name=\"lenguaje\" id=\"lenguaje\" class=\"form-control\"  rows=\"3\">".$avance_alumno[$i]['lenguaje']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"social\">Social:</label>
+																					  	<textarea readonly name=\"social\" id=\"social\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['social']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"afectiva\">Afectiva:</label>
+																					  	<textarea readonly name=\"afectiva\" id=\"afectiva\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['afectiva']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"motora\">Motora:</label>
+																					  	<textarea readonly name=\"motora\" id=\"motora\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['motora']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"sexual\">Sexual:</label>
+																					  	<textarea readonly name=\"sexual\" id=\"sexual\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['sexual']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"fisica\">Fisica:</label>
+																					  	<textarea readonly name=\"fisica\" id=\"fisica\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['fisica']."</textarea>
+																					  </div>
+
+
+																					  <div class=\"form-group\">
+																					  	<label from=\"moral\"\>Moral:</label>
+																					  	<textarea readonly name=\"moral\" id=\"moral\" class=\"form-control\" rows=\"3\">".$avance_alumno[$i]['moral']."</textarea>
+																					  </div>
+																					</form>
+																	      	</div>
+
+																	      <pre>Cargados a la fecha :".$avance_alumno[$i]['fecha']."</pre>
+																	    </div>
+																	  </div>
+																  	  </div>";
 														}
-												?>
+												?>\
 												    </div>
+												    <script type="text/javascript">
+												    $('.enlace').on('show.bs.modal', function (e) {
+														  if (!data) return e.preventDefault() // stops modal from being shown
+														});
+												    </script>
 										        	<!-- FIN DE SECCIONES -->
 										      </div>
 						</div>
@@ -472,22 +545,26 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 		    </div>
 
 
-				<div class="bs-callout bs-callout-warning"><h2>Seleccionar o Cambiar La Secci&oacute;n <?php echo "".$seccion_grado_seleccionada."";?></h2></div>
+				<div class="bs-callout bs-callout-warning">
+					<h2>Seleccionar o Cambiar La Secci&oacute;n <?php echo "".$seccion_grado_seleccionada."";?></h2>
+	
+								        	<div class="list-group">
+								        	<?php
+								        			$secciones=$this->session->userdata('secciones_docente');
+								        			for ($i=0; $i < count($secciones); $i++) { 
+								        				# Imprimo Las Secciones
+								        				echo '<a href="'.base_url().index_page().'/docente/seleccionar_seccion/'.$secciones[$i]['id'].'" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
+								        			}
+								        	?>
+										      <!-- Texto de muestra <a href="#" class="list-group-item active">
+										        <h4 class="list-group-item-heading">List group item heading</h4>
+										        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+										      </a> -->
+										    </div>
 
-							        	<div class="list-group">
-							        	<?php
-							        			$secciones=$this->session->userdata('secciones_docente');
-							        			for ($i=0; $i < count($secciones); $i++) { 
-							        				# Imprimo Las Secciones
-							        				echo '<a href="'.base_url().index_page().'/docente/seleccionar_seccion/'.$secciones[$i]['id'].'" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
-							        			}
-							        	?>
-									      <!-- Texto de muestra <a href="#" class="list-group-item active">
-									        <h4 class="list-group-item-heading">List group item heading</h4>
-									        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-									      </a> -->
-									    </div>
+				</div>
 
+					
 
 		    <script type="text/javascript">
 		    	$(function () {

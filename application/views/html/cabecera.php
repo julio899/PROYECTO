@@ -183,6 +183,9 @@ background-size: cover;
 	opacity: 1;
 	padding-bottom: 10px;
 }
+div.av-modal{
+	padding: 30px;
+}
 </style>
 
   <script>
