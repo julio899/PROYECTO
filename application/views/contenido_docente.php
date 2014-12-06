@@ -329,6 +329,7 @@ if(isset($avance)):
 				
 			</div>
 
+
 		 </div>
  </div>
 
@@ -338,6 +339,80 @@ if(isset($avance)):
  endif;
 ?>
 
+
+<?php if(isset($avance_alumno)):?>
+	<!--  se detalla los avaces del alumno y se cargan en una tabla	-->
+	<div class="col-md-9 docs">
+		<h1>Docente <?php echo $usuario['nombre_completo'];?></h1>
+		<pre>Alumno: <?php echo strtoupper($alumno['nombres'].' '.$alumno['apellidos']); ?>
+		 		<br>Cedula: <?php echo $alumno['cedula'].'   Edad:'.$alumno['edad'].'  Seccion: '.$alumno['seccion'].'  Grado:'.$alumno['grado'];?> 
+		</pre>
+		<h3>Avances que ha tenido el Alumno</h3>
+						<!-- <table class="table">
+					        <thead>
+					          <tr>
+					            <th>#</th>
+					            <th>First Name</th>
+					            <th>Last Name</th>
+					            <th>Fecha</th>
+					          </tr>
+					        </thead>
+					        <tbody>
+								<?php //var_dump($avance_alumno);
+								/*
+										for ($i=0; $i < count($avance_alumno); $i++) { 
+											echo "<tr><td>".($i+1)."</td><td>Mark</td><td>".$avance_alumno[$i]['fecha']."</td><td> <button class=\"btn btn-success\">Ver</button> </td></tr>";
+										}*/
+								?>
+
+					        </tbody>
+				      </table> -->
+
+		<div class="row-fluid">
+			<div class="col-md-6">
+						<div class="panel panel-success">
+										      <div class="panel-heading">
+										        <h3 class="panel-title">Avances</h3>
+										      </div>
+										      <div class="panel-body">
+										        	<!-- IMPRESION DE SECCIONES -->
+										        	<div class="list-group">
+												<?php //var_dump($avance_alumno);
+														for ($i=0; $i < count($avance_alumno); $i++) { 
+															//echo "<tr><td>".($i+1)."</td><td>Mark</td><td>".$avance_alumno[$i]['fecha']."</td><td> <button class=\"btn btn-success\">Ver</button> </td></tr>";
+															echo '<a href="#" class="list-group-item"><p class="list-group-item-text">#Nro. '.($i+1).'  -	 Fecha: 	<span class="label label-info"> '.$avance_alumno[$i]['fecha'].' </span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button class="btn btn-success">Ver  <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> </p></a>';
+														}
+												?>
+												    </div>
+										        	<!-- FIN DE SECCIONES -->
+										      </div>
+						</div>
+			</div>
+			<div class="col-md-6">
+				<div class="bs-callout bs-callout-warning"><h3>Seleccionar o Cambiar Seccion</h3></div>
+
+							        	<div class="list-group">
+							        	<?php
+							        			$secciones=$this->session->userdata('secciones_docente');
+							        			for ($i=0; $i < count($secciones); $i++) { 
+							        				# Imprimo Las Secciones
+							        				echo '<a href="'.base_url().index_page().'/docente/seleccionar_seccion/'.$secciones[$i]['id'].'" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
+							        			}
+							        	?>
+									      <!-- Texto de muestra <a href="#" class="list-group-item active">
+									        <h4 class="list-group-item-heading">List group item heading</h4>
+									        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+									      </a> -->
+									    </div>
+			</div>
+		</div>
+
+
+
+	</div>
+<?php endif;?>
+
+
 <?php 
 if($this->session->flashdata('selecciono_seccion') && !isset($avance)): 
 $seccion=$this->session->flashdata('selecciono_seccion');
@@ -346,9 +421,12 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 	<!--  si selecciona Una seccion especifica	-->
 	<div class="col-md-9 docs">
 		<pre>Selecciono la seccion <?php 
-		//echo $seccion['id']; 
+		//echo $seccion['id'];
+		$seccion_grado_seleccionada=""; 
 		for ($i=0; $i < count($secciones_docente); $i++) { 
+
 			if ($secciones_docente[$i]['id']==$seccion['id']) {
+							$seccion_grado_seleccionada="<span class=\"label label-warning\">".$secciones_docente[$i]['seccion']."</span> Grado: <span class=\"label label-info\">".$secciones_docente[$i]['grado']."</span>";
 							# Describimos la seccion
 							echo "<br>Secci&oacute;n : ".$secciones_docente[$i]['seccion'];
 							echo "  Grado : ".$secciones_docente[$i]['grado'];
@@ -386,12 +464,30 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 		        		$btn_cambiar_de_seccion='<button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cambiar al Alumno de Seccion" data-original-title="Cambiar al Alumno de Seccion"><span class="glyphicon glyphicon-random" aria-hidden="true"></span></button>';
 		        		$btn_info_avances='<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Ver Avances" data-original-title="Ver Avances"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>';
 		        		# imprimimos cuerpo de tabla
-		        		echo "<tr><td>".($a+1)."</td><td>".strtoupper( $alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])."</td><td>".strtoupper($alumnos[$a]['representante'])."</td><td>".$alumnos[$a]['edad']."</td><td> <a href=\"".base_url().index_page()."/docente/cargar_avance/".$alumnos[$a]['id']."\"> $btn_cargar_avance </a>  <a href=\"#\"> $btn_actualizar </a>   <a href=\"#\"> $btn_cambiar_de_seccion </a>   <a href=\"#\"> $btn_info_avances </a> </td></tr>";
+		        		echo "<tr><td>".($a+1)."</td><td>".strtoupper( $alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])."</td><td>".strtoupper($alumnos[$a]['representante'])."</td><td>".$alumnos[$a]['edad']."</td><td> <a href=\"".base_url().index_page()."/docente/cargar_avance/".$alumnos[$a]['id']."\"> $btn_cargar_avance </a>  <a href=\"#\"> $btn_actualizar </a>   <a href=\"#\"> $btn_cambiar_de_seccion </a>   <a href=\" ".base_url().index_page().'/docente/avances_alumno/'.$alumnos[$a]['id']." \"> $btn_info_avances </a> </td></tr>";
 		        	}
 		        ?>
 		        </tbody>
 		      </table>
 		    </div>
+
+
+				<div class="bs-callout bs-callout-warning"><h2>Seleccionar o Cambiar La Secci&oacute;n <?php echo "".$seccion_grado_seleccionada."";?></h2></div>
+
+							        	<div class="list-group">
+							        	<?php
+							        			$secciones=$this->session->userdata('secciones_docente');
+							        			for ($i=0; $i < count($secciones); $i++) { 
+							        				# Imprimo Las Secciones
+							        				echo '<a href="'.base_url().index_page().'/docente/seleccionar_seccion/'.$secciones[$i]['id'].'" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
+							        			}
+							        	?>
+									      <!-- Texto de muestra <a href="#" class="list-group-item active">
+									        <h4 class="list-group-item-heading">List group item heading</h4>
+									        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+									      </a> -->
+									    </div>
+
 
 		    <script type="text/javascript">
 		    	$(function () {
@@ -404,7 +500,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 
 
 
-<?php if(!$this->session->flashdata('registroAlumno') && !$this->session->flashdata('selecciono_seccion') && !isset($avance) ):?>
+<?php if(!isset($avance_alumno) && !$this->session->flashdata('registroAlumno') && !$this->session->flashdata('selecciono_seccion') && !isset($avance) ):?>
 			<!-- Contenido Central -->
 			<div class="col-md-9 docs">
 						<h1 id="getting-started">Bienvenido <?php echo $usuario['nombre_completo'];?> al panel del Docente</h1>

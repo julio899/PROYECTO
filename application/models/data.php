@@ -200,6 +200,29 @@ var $bandera=null;
 		return $this->temporal;
 	}//fin de traer_alumno
 
+	function traer_avances_alumno($id_alumno=""){
+		$query=$this->db->query("SELECT * FROM  `avance_integral` WHERE  `id_alumno` =$id_alumno ORDER BY  `fecha` DESC");
+		$this->temporal=null;
+		foreach ($query->result() as $row) {
+			# lecorro los avances de ese alumno y los coloco en un array
+			$this->temporal[]=array(
+									'id'=>$row->id,
+									'id_alumno'=>$row->id_alumno,
+									'enlace_docente'=>$row->enlace_docente,
+									'cognitiva'=>$row->cognitiva,
+									'lenguaje'=>$row->lenguaje,
+									'social'=>$row->social,
+									'afectiva'=>$row->afectiva,
+									'motora'=>$row->motora,
+									'sexual'=>$row->sexual,
+									'fisica'=>$row->fisica,
+									'moral'=>$row->moral,
+									'fecha'=>$row->fecha
+									);
+		}//fin de foreach
+		return $this->temporal;
+	}//fin de traer_avances_alumno
+
 	function traer_seccion_grado($id_seccion=""){
 		$query=$this->db->query("SELECT * FROM `secciones` WHERE `id` =$id_seccion");
 		$this->temporal3=null;
@@ -252,7 +275,7 @@ var $bandera=null;
 	}//reg_alumno
 
 	function reg_avance_integral($avance=""){
-			$sql="INSERT INTO `proyecto`.`avance_integral` ( `id` , `id_alumno` , `enlace_docente`, `cognitiva` , `lenguage` , `social` , `afectiva` , `motora` , `sexual` , `fisica` , `moral`, `fecha`) VALUES ( NULL, '".$avance['id_alumno']."','".$avance['id_enlace_docente']."' , '".$avance['cognitiva']."', '".$avance['lenguaje']."', '".$avance['social']."', '".$avance['afectiva']."', '".$avance['motora']."', '".$avance['sexual']."', '".$avance['fisica']."', '".$avance['moral']."', NOW() );";
+			$sql="INSERT INTO `proyecto`.`avance_integral` ( `id` , `id_alumno` , `enlace_docente`, `cognitiva` , `lenguaje` , `social` , `afectiva` , `motora` , `sexual` , `fisica` , `moral`, `fecha`) VALUES ( NULL, '".$avance['id_alumno']."','".$avance['id_enlace_docente']."' , '".$avance['cognitiva']."', '".$avance['lenguaje']."', '".$avance['social']."', '".$avance['afectiva']."', '".$avance['motora']."', '".$avance['sexual']."', '".$avance['fisica']."', '".$avance['moral']."', NOW() );";
 			if ($this->db->query($sql)) {
 				return TRUE;
 			}else{

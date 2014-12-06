@@ -78,6 +78,13 @@ class Docente extends CI_Controller {
 			redirect('','refreh');
 	}//fin de cerrar_session
 
+	function avances_alumno($id_alumno=""){
+		$this->load->model('data');
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_docente',array('avance_alumno'=>$this->data->traer_avances_alumno($id_alumno),'alumno'=>$this->data->traer_alumno($id_alumno) ) );
+		$this->load->view('html/pie_pagina');
+	}//fin de avances_alumno
+
 	function registrar_avance(){
 		$this->load->model('data');
 		if($this->data->reg_avance_integral($this->input->post()) ){
