@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-12-2014 a las 16:46:28
+-- Tiempo de generación: 06-12-2014 a las 16:00:55
 -- Versión del servidor: 5.5.40-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.5
 
@@ -29,7 +29,7 @@ USE `proyecto`;
 --
 
 CREATE TABLE IF NOT EXISTS `alumnos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cedula` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
@@ -41,8 +41,9 @@ CREATE TABLE IF NOT EXISTS `alumnos` (
   `ult_visita_psicologo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `id_seccion` int(11) NOT NULL,
   `id_representante` int(11) NOT NULL,
-  `fecha_inscripcion` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fecha_inscripcion` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=7 ;
 
 --
 -- Truncar tablas antes de insertar `alumnos`
@@ -67,13 +68,14 @@ INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico
 --
 
 CREATE TABLE IF NOT EXISTS `auditoria` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `ip` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `valido` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` datetime NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=172 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fecha` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=178 ;
 
 --
 -- Truncar tablas antes de insertar `auditoria`
@@ -186,7 +188,13 @@ INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`) V
 (110, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:05:09'),
 (111, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:06:30'),
 (112, '', '', '127.0.0.1', '0', '2014-11-07 12:06:37'),
-(113, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:13:28');
+(113, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:13:28'),
+(172, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.101', '1', '2014-12-05 21:59:47'),
+(173, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.101', '1', '2014-12-05 22:01:18'),
+(174, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.101', '1', '2014-12-05 22:02:43'),
+(175, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.101', '1', '2014-12-05 22:16:55'),
+(176, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.101', '1', '2014-12-05 22:17:00'),
+(177, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-06 14:03:47');
 
 -- --------------------------------------------------------
 
@@ -195,25 +203,36 @@ INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`) V
 --
 
 CREATE TABLE IF NOT EXISTS `avance_integral` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `id_alumno` int(10) NOT NULL,
   `enlace_docente` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `cognitiva` text COLLATE utf8_spanish_ci NOT NULL,
-  `lenguage` text COLLATE utf8_spanish_ci NOT NULL,
+  `lenguaje` text COLLATE utf8_spanish_ci NOT NULL,
   `social` text COLLATE utf8_spanish_ci NOT NULL,
   `afectiva` text COLLATE utf8_spanish_ci NOT NULL,
   `motora` text COLLATE utf8_spanish_ci NOT NULL,
   `sexual` text COLLATE utf8_spanish_ci NOT NULL,
   `fisica` text COLLATE utf8_spanish_ci NOT NULL,
   `moral` text COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fecha` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
 
 --
 -- Truncar tablas antes de insertar `avance_integral`
 --
 
 TRUNCATE TABLE `avance_integral`;
+--
+-- Volcado de datos para la tabla `avance_integral`
+--
+
+INSERT INTO `avance_integral` (`id`, `id_alumno`, `enlace_docente`, `cognitiva`, `lenguaje`, `social`, `afectiva`, `motora`, `sexual`, `fisica`, `moral`, `fecha`) VALUES
+(6, 6, '3630', '', '', '', '', '', '', '', '', '2014-12-05 21:37:18'),
+(7, 6, '3630', '', '', '', '', '', '', '', '', '2014-12-05 23:32:57'),
+(8, 6, '3630', 'Cognitiva', 'Lenguaje', 'Social', 'Afectiva', 'Motora', 'sexual', 'Fisica', 'Moral', '2014-12-06 15:41:50'),
+(9, 6, '3630', '', '', '', '', '', 'prueba de campos', '', '', '2014-12-06 15:44:02');
+
 -- --------------------------------------------------------
 
 --
@@ -221,13 +240,14 @@ TRUNCATE TABLE `avance_integral`;
 --
 
 CREATE TABLE IF NOT EXISTS `docentes` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `id_enlace` varchar(20) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_enlace` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Truncar tablas antes de insertar `docentes`
@@ -252,15 +272,17 @@ INSERT INTO `docentes` (`id`, `nombre`, `apellido`, `telefono`, `correo`, `id_en
 --
 
 CREATE TABLE IF NOT EXISTS `representanes` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cedula` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` text COLLATE utf8_spanish_ci NOT NULL,
-  `edad` int(5) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `edad` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cedula` (`cedula`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Truncar tablas antes de insertar `representanes`
@@ -285,14 +307,15 @@ INSERT INTO `representanes` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`,
 --
 
 CREATE TABLE IF NOT EXISTS `secciones` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `grado` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `seccion` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `year` varchar(7) COLLATE utf8_spanish_ci NOT NULL,
   `cap_alumnos` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `turno` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `id_docente` varchar(10) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_docente` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
 
 --
 -- Truncar tablas antes de insertar `secciones`
@@ -320,7 +343,7 @@ INSERT INTO `secciones` (`id`, `grado`, `seccion`, `year`, `cap_alumnos`, `turno
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `clave` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -328,8 +351,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `tipo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `secciones` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
   `turno` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
-  `id_enlace` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_enlace` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `usuario` (`usuario`),
+  UNIQUE KEY `id_enlace` (`id_enlace`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
 
 --
 -- Truncar tablas antes de insertar `usuarios`
@@ -354,91 +380,6 @@ INSERT INTO `usuarios` (`id`, `usuario`, `clave`, `nombre`, `apellido`, `tipo`, 
 (11, 'mariar', 'e50d9e9230021698fa7a4d82e1b86094', 'Maria', 'Rodriguez', 'D', '', '', 'e50d'),
 (12, 'jaivelis', '3630147a213aba59fbfc30119373898b', 'Jaivelis', 'Villegas', 'D', '', '', '3630');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `auditoria`
---
-ALTER TABLE `auditoria`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `avance_integral`
---
-ALTER TABLE `avance_integral`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `docentes`
---
-ALTER TABLE `docentes`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `representanes`
---
-ALTER TABLE `representanes`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `cedula` (`cedula`);
-
---
--- Indices de la tabla `secciones`
---
-ALTER TABLE `secciones`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `usuario` (`usuario`), ADD UNIQUE KEY `id_enlace` (`id_enlace`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT de la tabla `auditoria`
---
-ALTER TABLE `auditoria`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=172;
---
--- AUTO_INCREMENT de la tabla `avance_integral`
---
-ALTER TABLE `avance_integral`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `docentes`
---
-ALTER TABLE `docentes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT de la tabla `representanes`
---
-ALTER TABLE `representanes`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT de la tabla `secciones`
---
-ALTER TABLE `secciones`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
