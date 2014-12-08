@@ -97,7 +97,9 @@ border-radius: 3px;
 .bs-callout-warning {
 border-left-color: #f0ad4e;
 }
-
+.bs-callout-danger{
+border-left-color: #d43f3a;	
+}
    /* Prevents slides from flashing */
     #slides {
       display:none;

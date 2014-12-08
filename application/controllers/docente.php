@@ -12,6 +12,9 @@ class Docente extends CI_Controller {
 			$this->carga_en_session_a_docentes();
 			$this->carga_en_session_las_secciones();
 			$this->validacionDocente();
+			
+		$this->datos_secciones=$this->data->traer_secciones();
+		$this->session->set_userdata('secciones_registradas',$this->datos_secciones);
 		# primera funcion que ejecuta el docente 	
 			$this->load->view('html/cabecera');
 			$this->load->view('contenido_docente');

@@ -225,6 +225,7 @@
 										    		<?php #recorro para Buscar las secciones
 										    			if($this->session->userdata('secciones_registradas')){
 										    				$secciones=$this->session->userdata('secciones_registradas');
+
 										    				for ($i=0; $i < count($secciones) ; $i++) { 
 										    					$turno="";
 										    					if($secciones[$i]['turno']=='M'){$turno='Mañana';}
@@ -462,5 +463,7 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 
 			</div>
 		</div> -->
+
+
 
 	</div>
