@@ -114,4 +114,25 @@ class Docente extends CI_Controller {
 		}
 		redirect('docente','refreh');
 	}
+
+	function actualizar_alumno($id_alumno=""){
+		$this->load->model('data');
+		$alumno=$this->data->traer_alumno($id_alumno);
+		$representante=$this->data->traer_representante($alumno['id_representante']);
+
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_docente',array('alumno_update'=>$alumno,'representante_update'=>$representante ) );
+		$this->load->view('html/pie_pagina');
+	}//fin de actualizar_alumno
+
+	function procesar_actualizacion_alumno(){
+		$this->load->model('data');
+
+		if($this->data->proceso_actualizar_alumno($this->input->post()) ){
+			$this->session->set_flashdata('ok','ACTUALIZACION DE DATOS PROCESADA SATISFACTORIAMENTE');
+		}else{
+			$this->session->set_flashdata('error','No se pudo realizar la actualizacion');
+		}
+		redirect('docente','refreh');
+	}//fin de procesar_actualizacion_alumno
 }

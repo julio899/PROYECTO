@@ -538,7 +538,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 		        <?php
 		        	for ($a=0; $a < count($alumnos); $a++) { 
 		        		$btn_cargar_avance='<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cargar Avances" data-original-title="Cargar Avances"><span class="glyphicon glyphicon-export" aria-hidden="true"></span></button>';
-		        		$btn_actualizar='<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Actualizar Datos" data-original-title="Actualizar Datos"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>';
+		        		$btn_actualizar='<a href="'.base_url().index_page().'/docente/actualizar_alumno/'.$alumnos[$a]['id'].'" ><button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Actualizar Datos" data-original-title="Actualizar Datos"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>';
 		        		$btn_cambiar_de_seccion='<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalcambiar'.$alumnos[$a]['id'].'" ><span class="glyphicon glyphicon-random" aria-hidden="true"></span></button>';
 		        		$modal_cambio_seccion="
 <!-- Modal -->
@@ -626,7 +626,172 @@ echo $modal_cambio_seccion;
 
 
 
-<?php if(!isset($avance_alumno) && !$this->session->flashdata('registroAlumno') && !isset($selecciono_seccion['id']) && !isset($avance) ):?>
+<?php if(isset($alumno_update)):?>
+	<div class="col-md-9">
+		<h3>Actualizion de Datos</h3>
+		<?php //var_dump($alumno_update);?>
+		<form action="<?php echo base_url().index_page()."/docente/procesar_actualizacion_alumno";?>" class="form-horizontal" method="post" role="form">
+		<input type="hidden" name="id_alumno" value="<?php echo $alumno_update['id'];?>">
+		<input type="hidden" name="id_representante" value="<?php echo $representante_update['id'];?>">			    	
+					    	<!--Formulario de registro DOCENTE  -->				
+										<div class="panel panel-warning">
+										  <div class="panel-heading"><label>Actualizaci&oacute;n</label> de datos del REPRESENTANTE</div>
+										  <div class="panel-body">
+
+													  
+													  <div class="form-group">
+													    <label for="nombreR" class="col-sm-2 control-label">Nombres</label>
+													    <div class="col-sm-10">
+													      <input type="text" name="nombreR" class="form-control" id="nombreR" placeholder="Nombres" value="<?php echo $representante_update['nombres'];?>" required>
+													    </div>
+													  </div>
+
+													  <div class="form-group">
+													    <label for="apellidoR" class="col-sm-2 control-label">Apellido</label>
+													    <div class="col-sm-10">
+													      <input type="text" name="apellidoR" class="form-control" id="apellidoR" placeholder="Apellidos" value="<?php echo $representante_update['apellidos'];?>" required>
+													    </div>
+													  </div>
+
+													  <div class="form-group">
+													    <label for="cedulaR" class="col-sm-2 control-label">Cedula</label>
+													    <div class="col-sm-10">
+													      <input type="text" name="cedulaR" class="form-control" id="cedulaR" value="<?php echo $representante_update['cedula'];?>">
+													    </div>
+													  </div>
+
+													  <div class="form-group">
+													    <label for="edadR" class="col-sm-2 control-label">Edad</label>
+													    <div class="col-sm-10">
+													      <input type="number" name="edadR" class="form-control" id="edadR" placeholder="puede cargar de edades de 18 a 70 años" min="18" max="70" value="<?php echo $representante_update['edad'];?>">
+													    </div>
+													  </div>
+
+													  <div class="form-group">
+													    <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+													    <div class="col-sm-10">
+													      <input type="text" name="telefono" class="form-control" id="telefono" placeholder="introduzca un telefono" value="<?php echo $representante_update['telefono'];?>">
+													    </div>
+													  </div>
+
+													  <div class="form-group">
+													    <label for="inputEmail3" class="col-sm-2 control-label">Correo</label>
+													    <div class="col-sm-10">
+													      <input type="email" name="correo" class="form-control" id="inputEmail3" placeholder="correo@electronico.com" value="<?php echo $representante_update['correo'];?>">
+													    </div>
+													  </div>
+
+													  <div class="form-group">
+													    <label for="direccion" class="col-sm-2 control-label">Dirección</label>
+													    <div class="col-sm-10">
+													      <textarea name="direccion" id="direccion" rows="10" class="form-control" placeholder="Direccion Completa"><?php echo $representante_update['direccion'];?></textarea>
+													    </div>
+													  </div>
+
+													
+
+										<!--  Fin del Formulario para REPRESENTANE -->
+										  </div>
+										</div>
+					<!--ALUMNO-->
+
+							<div class="panel panel-success">
+							  <div class="panel-heading">Actualizaci&oacute;n de datos del ALUMNO</div>
+							  <div class="panel-body">
+
+										
+										  
+										  <div class="form-group">
+										    <label for="nombreA" class="col-sm-2 control-label">Nombres</label>
+										    <div class="col-sm-10">
+										      <input type="text" name="nombreA" class="form-control" id="nombreA" placeholder="Nombre" required value="<?php echo $alumno_update['nombres'];?>">
+										    </div>
+										  </div>
+
+										  <div class="form-group">
+										    <label for="apellidoA" class="col-sm-2 control-label">Apellidos</label>
+										    <div class="col-sm-10">
+										      <input type="text" name="apellidoA" class="form-control" id="apellidoA" placeholder="Apellido" required value="<?php echo $alumno_update['apellidos'];?>">
+										    </div>
+										  </div>
+
+										  <div class="form-group">
+										    <label for="cedulaA" class="col-sm-2 control-label">Cedula</label>
+										    <div class="col-sm-10">
+										      <input type="text" name="cedulaA" class="form-control" id="cedulaA" value="<?php echo $alumno_update['cedula'];?>">
+										    </div>
+										  </div>
+										  
+
+										  <div class="form-group">
+										    <label for="edadA" class="col-sm-2 control-label">Edad</label>
+										    <div class="col-sm-10">
+										      <input type="number" name="edadA" class="form-control" id="edadA" value="<?php echo $alumno_update['edad'];?>">
+										    </div>
+										  </div>
+
+
+
+										  <div class="form-group">
+										    <label for="alergico" class="col-sm-2 control-label">Alegico?</label>
+										    <div class="col-sm-10">
+										    	<select name="alergico" id="alergico" class="form-control">
+										    		<option value="S">SI</option>
+										    		<option value="N">NO</option>
+										    	</select>
+										    </div>
+										  </div>
+										  <div class="form-group">
+										    <label for="descripcion_alergia" class="col-sm-2 control-label">En caso de Alergia</label>
+										    <div class="col-sm-10">
+										      <input type="text" class="form-control" name="descripcion_alergia" id="descripcion_alergia" placeholder="En caso de ser ALRGICO describa" value="<?php echo $alumno_update['descripcion_alergia'];?>">
+										    </div>
+										  </div>
+
+										  <div class="form-group">
+										    <label for="peso" class="col-sm-2 control-label">Peso</label>
+										    <div class="col-sm-10">
+										      <input type="number" name="peso" class="form-control" id="peso" value="<?php echo $alumno_update['peso'];?>">
+										    </div>
+										  </div>
+
+										  <div class="form-group">
+										    <label for="estatura" class="col-sm-2 control-label">Estatura</label>
+										    <div class="col-sm-10">
+										      <input type="text" name="estatura" class="form-control" id="estatura" value="<?php echo $alumno_update['altura'];?>">
+										    </div>
+										  </div>
+
+										  <div class="form-group">
+										    <label for="ult_consulta" class="col-sm-2 control-label">Ultima Visita Psicologica</label>
+										    <div class="col-sm-10">
+										      <input type="text" name="ult_consulta" class="form-control" id="ult_consulta" placeholder="Ejemplo 10-05-2014" value="<?php echo $alumno_update['ult_visita_psicologo'];?>">
+										    </div>
+										  </div>
+
+
+
+
+										  <div class="form-group">
+										    <div class="col-sm-offset-2 col-sm-10">
+										      <button type="submit" class="btn btn-lg btn-success">Actualizar</button>
+										    </div>
+										  </div>
+				
+
+							<!--  Fin del Formulario para ALUMNO -->
+							  </div>
+							</div>
+					<!--Fin de ALUMNO -->
+
+		</form>
+	</div>	
+<?php endif; //fin de actualizar_alumno?>	
+
+
+
+
+<?php if(!isset($alumno_update) && !isset($avance_alumno) && !$this->session->flashdata('registroAlumno') && !isset($selecciono_seccion['id']) && !isset($avance) ):?>
 			<!-- Contenido Central -->
 			<div class="col-md-9 docs">
 						<h1 id="getting-started">Bienvenido <?php echo $usuario['nombre_completo'];?> al panel del Docente</h1>

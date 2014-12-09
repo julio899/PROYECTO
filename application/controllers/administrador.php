@@ -90,7 +90,6 @@ class Administrador extends CI_Controller {
 	function historial(){
 		$this->load->model('data');
 		$this->datos_temporal=$this->data->ultimos_ingresos();
-		//var_dump($this->datos_temporal);
 		$this->load->view('html/cabecera');
 		$this->load->view('historial',array('historial'=> $this->datos_temporal ));
 		$this->load->view('html/pie_pagina');

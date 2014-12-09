@@ -77,6 +77,8 @@ var $bandera=null;
 				$query2=$this->db->query("INSERT INTO `proyecto`.`usuarios` (`id`, `usuario`, `clave`, `nombre`, `apellido`, `tipo`, `secciones`, `turno`, `id_enlace`) VALUES (NULL, '".$docente["usuario"]."', '".md5($docente["clave"].$docente["usuario"])."', '".$docente["nombre"]."', '".$docente["apellido"]."', 'D', '', '', '".substr(md5($docente["clave"].$docente["usuario"]), 0,4)."');");
 				
 				if($query&&$query2){
+
+					$this->reg_accion_auditoria(array('accion'=>"Reg. de Nuevo Docente",'afectado'=>$id,'cambio'=>'multiple'));
 					$this->session->set_flashdata('ok', '¡ Exito Registro Procesado Satisfactoriamente !');
 					redirect('administrador','refreh');
 				}
@@ -200,7 +202,14 @@ var $bandera=null;
 								'cedula' => $row->cedula,
 								'edad' => $row->edad,
 								'seccion' => $seccion_grado['seccion'],
-								'grado' => $seccion_grado['grado'] 
+								'grado' => $seccion_grado['grado'],
+								'alergico' =>$row->alergico ,
+								'descripcion_alergia' =>$row->descripcion_alergia ,
+								'peso' =>$row->peso ,
+								'altura' =>$row->altura ,
+								'ult_visita_psicologo' =>$row->ult_visita_psicologo ,
+								'id_seccion' =>$row->id_seccion ,
+								'id_representante' =>$row->id_representante 
 								);
 		}
 		return $this->temporal;
@@ -259,10 +268,12 @@ var $bandera=null;
 					foreach ($query->result() as $row) {
 						$id=$row->id;
 					}//cirre foreach
-
+					$this->reg_accion_auditoria(array('accion'=>"Reg. Reprecentante",'afectado'=>$id,'cambio'=>'multiple'));
 
 					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW());")){
+						$this->reg_accion_auditoria(array('accion'=>"Reg. Alumno",'afectado'=>$id,'cambio'=>'multiple'));
 						$this->bandera=true;
+
 					}else{
 						$this->bandera=false;
 					}
@@ -283,6 +294,8 @@ var $bandera=null;
 	function reg_avance_integral($avance=""){
 			$sql="INSERT INTO `proyecto`.`avance_integral` ( `id` , `id_alumno` , `enlace_docente`, `cognitiva` , `lenguaje` , `social` , `afectiva` , `motora` , `sexual` , `fisica` , `moral`, `fecha`) VALUES ( NULL, '".$avance['id_alumno']."','".$avance['id_enlace_docente']."' , '".$avance['cognitiva']."', '".$avance['lenguaje']."', '".$avance['social']."', '".$avance['afectiva']."', '".$avance['motora']."', '".$avance['sexual']."', '".$avance['fisica']."', '".$avance['moral']."', NOW() );";
 			if ($this->db->query($sql)) {
+				$this->reg_accion_auditoria(array('accion'=>"Nuevo Avance",'afectado'=>$id,'cambio'=>'mixto'));
+
 				return TRUE;
 			}else{
 				return FALSE;
@@ -308,6 +321,29 @@ var $bandera=null;
 
 	}//fin de traer_docente
 
+
+	function traer_representante($id=""){
+		$query=$this->db->query("SELECT * FROM `representanes` WHERE `id` LIKE '$id'");
+		$this->temporal2=null;
+		foreach ($query->result() as $row) {
+			$this->temporal2=array(
+						'id'=>$row->id,
+						'idR'=>$row->id,
+						'nombres'=>$row->nombres,
+						'apellidos'=>$row->apellidos,
+						'cedula'=>$row->cedula,
+						'telefono'=>$row->telefono,
+						'correo'=>$row->correo,
+						'direccion'=>$row->direccion,
+						'edad'=>$row->edad
+				);
+		}
+		return $this->temporal2;
+			
+
+	}//fin de traer_representante
+
+
 	function modificar_docente($datos=""){
 			if ($this->db->query("UPDATE `docentes` SET `nombre`='".$datos['nombre']."',`apellido`='".$datos['apellido']."',`telefono`='".$datos['telefono']."',`correo`='".$datos['correo']."' WHERE `id`=".$datos['id']."")) {
 				return true;
@@ -315,6 +351,17 @@ var $bandera=null;
 				return false;
 			}
 	}//modificar_docente
+
+	function proceso_actualizar_alumno($datos=""){
+		$sql1="UPDATE `alumnos` SET `nombres`='".$datos['nombreA']."',`apellidos`='".$datos['apellidoA']."',`cedula`='".$datos['cedulaA']."',`edad`=".$datos['edadA'].",`alergico`='".$datos['alergico']."',`descripcion_alergia`='".$datos['descripcion_alergia']."',`peso`='".$datos['peso']."',`altura`='".$datos['estatura']."',`ult_visita_psicologo`='".$datos['ult_consulta']."' WHERE `id`=".$datos['id_alumno'];
+		$sql2="UPDATE `representanes` SET `nombres`='".$datos['nombreR']."',`apellidos`='".$datos['apellidoR']."',`cedula`='".$datos['cedulaR']."',`telefono`='".$datos['telefono']."',`correo`='".$datos['correo']."',`direccion`='".$datos['direccion']."',`edad`=".$datos['edadR']." WHERE `id`=".$datos['id_representante'];
+		if($this->db->query($sql1) && $this->db->query($sql2) ){
+			$this->reg_accion_auditoria(array('accion'=>"Actualizacion de Datos",'afectado'=>$datos['id_alumno'],'cambio'=>'mixto'));
+			return true;
+		}else{
+			return false;
+		}
+	}// fin de proceso_actualizar_alumno
 
 	function eliminar_docente($id=""){
 			if ($this->db->query("DELETE FROM `proyecto`.`docentes` WHERE `docentes`.`id` = $id")) {
@@ -396,6 +443,8 @@ var $bandera=null;
 		}
 		return $this->temporal;
 	}
+
+
 
 	function cambiar_seccion_alumno($datos=""){
 		if($this->db->query("UPDATE `alumnos` SET `id_seccion`= ".$datos['seccion']." WHERE `alumnos`.`id` = ".$datos['id_alumno']."") ){
