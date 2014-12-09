@@ -179,6 +179,13 @@
 										  </div>
 
 
+										  <div class="form-group">
+										    <label for="fnacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
+										    <div class="col-sm-10">
+										      <input type="date" name="fnacimiento" class="form-control" id="fnacimiento">
+										    </div>
+										  </div>
+										  
 
 										  <div class="form-group">
 										    <label for="alergico" class="col-sm-2 control-label">Alegico?</label>
@@ -427,7 +434,6 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 						Tales como
 						<ol class="breadcrumb">
 							<li>Twitter Bootstarp</li>
-							<li>CodeIgniter</li>
 							<li>JQuery</li>
 							<li>MySQL</li>
 						</ol>

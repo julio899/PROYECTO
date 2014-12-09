@@ -33,7 +33,7 @@
                 <ul>
                   <li><span class="glyphicon glyphicon-user"></span></li>
                   <li><span class="glyphicon glyphicon-earphone"></span> <code>(0424) 3316068</code></li>
-                  <li><span class="glyphicon glyphicon-envelope"></span></li>
+                  <li><span class="glyphicon glyphicon-envelope"></span> rainnyegd@gmail.com</li>
                 </ul>
                 
             </p>

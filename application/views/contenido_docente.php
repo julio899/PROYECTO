@@ -1,7 +1,4 @@
 <?php
-#inicializo variables
-$usuario=$this->session->userdata('datos_usuarios');
-
 
 //ALERTAS E INFORMACIONES
 if($this->session->flashdata('error')): ?>
@@ -168,6 +165,13 @@ if($this->session->flashdata('error')): ?>
 										    <label for="edadA" class="col-sm-2 control-label">Edad</label>
 										    <div class="col-sm-10">
 										      <input type="number" name="edadA" class="form-control" id="edadA">
+										    </div>
+										  </div>
+
+										  <div class="form-group">
+										    <label for="fnacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
+										    <div class="col-sm-10">
+										      <input type="date" name="fnacimiento" class="form-control" id="fnacimiento">
 										    </div>
 										  </div>
 
@@ -498,7 +502,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 
 	<!--  si selecciona Una seccion especifica	-->
 	<div class="col-md-9 docs">
-		<pre>Selecciono la seccion <?php 
+		<pre id="men-alumno">Selecciono la seccion <?php 
 		//echo $seccion['id'];
 		$seccion_grado_seleccionada=""; 
 		for ($i=0; $i < count($secciones_docente); $i++) { 

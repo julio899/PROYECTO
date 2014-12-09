@@ -122,8 +122,14 @@ var $bandera=null;
 	}
 
 	function crear_seccion($seccion=""){
-		$query=$this->db->query("INSERT INTO `proyecto`.`secciones` (`id`, `seccion`, `grado`, `year`, `cap_alumnos`, `turno`, `id_docente`) VALUES (NULL, '".$seccion['seccion']."', '".$seccion['grado']."', '', '".$seccion['capacidad']."', '".$seccion['turno']."', '".$seccion['docente']."');");
-		return $query;
+			if($this->db->query("INSERT INTO `proyecto`.`secciones` (`id`, `seccion`, `grado`, `year`, `cap_alumnos`, `turno`, `id_docente`) VALUES (NULL, '".$seccion['seccion']."', '".$seccion['grado']."', '', '".$seccion['capacidad']."', '".$seccion['turno']."', '".$seccion['docente']."');")){
+				$this->reg_accion_auditoria(array('accion'=>"Reg. Nueva Secci&oacute;n",'afectado'=>$seccion['seccion'],'cambio'=>$seccion['grado']." - ".$seccion['seccion']));
+				return true;
+			}else{
+				return false;
+			}	
+			//return $query;
+
 	}//fin de crear_seccion
 
 	function traer_secciones(){
@@ -270,7 +276,7 @@ var $bandera=null;
 					}//cirre foreach
 					$this->reg_accion_auditoria(array('accion'=>"Reg. Reprecentante",'afectado'=>$id,'cambio'=>'multiple'));
 
-					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW());")){
+					if($this->db->query("INSERT INTO `proyecto`.`alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`,`fecha_nacimiento`) VALUES (NULL, '".$datos['nombreA']."', '".$datos['apellidoA']."', '".$datos['cedulaA']."', '".$datos['edadA']."', '".$datos['alergico']."', '".$datos['descripcion_alergia']."', '".$datos['peso']."', '".$datos['estatura']."', '".$datos['ult_consulta']."', '".$datos['seccion']."', '$id', NOW(),'".$datos['fnacimiento']."');")){
 						$this->reg_accion_auditoria(array('accion'=>"Reg. Alumno",'afectado'=>$id,'cambio'=>'multiple'));
 						$this->bandera=true;
 

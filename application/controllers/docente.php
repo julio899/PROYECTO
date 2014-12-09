@@ -11,7 +11,6 @@ class Docente extends CI_Controller {
 			$this->session->set_userdata('secciones_docente',$this->data->mis_secciones());
 			$this->carga_en_session_a_docentes();
 			$this->carga_en_session_las_secciones();
-			$this->validacionDocente();
 			
 		# primera funcion que ejecuta el docente 	
 			$this->load->view('html/cabecera');
@@ -39,9 +38,8 @@ class Docente extends CI_Controller {
 	}//fin de registro Alumno
 
 	function procesar_registro_alumno(){
-		$this->datos_temporal=$this->input->post();
 		$this->load->model('data');
-		if($this->data->reg_alumno($this->datos_temporal)){
+		if($this->data->reg_alumno( $this->input->post() 	) ){
 			$this->session->set_flashdata('ok','REGISTRO COMPLETADO SATISFACTORIAMENTE');
 		}else{
 			
@@ -60,6 +58,7 @@ class Docente extends CI_Controller {
 	}//Verificamos si es un docente que entro
 
 	function seleccionar_seccion($secc_select=""){
+		
 		$this->load->model('data');
 		//$this->session->set_userdata('selecciono_seccion', array('id' => $secc_select, 'alumnos'=>$this->data->traer_alumnos_inscritos($secc_select)) );
 		//redirect('docente','refreh');
@@ -70,7 +69,7 @@ class Docente extends CI_Controller {
 	} //fin de seleccionar_seccion
 	
 
-	function cargar_avance($id_alumno){
+	function cargar_avance($id_alumno=""){
 		$this->load->model('data');
 
 		$this->session->set_flashdata('alumno_seleccionado',$this->data->traer_alumno($id_alumno));

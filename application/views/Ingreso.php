@@ -143,6 +143,8 @@ div.jumbotron{
 }
 h1.titulo{
 	font-size: 1.5em;
+  text-align: center;
+  margin-left: 50px;
 }
 h1.titulo>strong{
 	font-size: 0.7em;
@@ -166,7 +168,7 @@ strong.txt-white{
 <div class="bs-header" id="content">
 	<div class="container">
 		<h2>APLICACIÓN WEB PARA GESTIONAR LOS PROCESOS DE LOS ESTUDIANTES </h2>
-		<p class="alert alert-info"> Diseñado y Desarrollado bajo plataformas <small  class="label label-success"> Libres</small> HTML/CSS/JS CodeIgniterframework PHP</p>
+		<p class="alert alert-info">Bienvenidos al instituto de educación especial nacional bolivariano <strong>“RÓMULO GALLEGOS"</strong></p>
 	</div>
 </div>
 <div class="container espacio">
@@ -176,8 +178,9 @@ strong.txt-white{
 		<div class="row-fluid">
 			<div class="col-md-8">
 				<div class="jumbotron">
-					<h1 class="titulo">Bienvenidos al instituto de educación especial nacional bolivariano <strong>“RÓMULO GALLEGOS"</strong></h1>
-						<p><pre>Aplicaci&oacute;n Tecnologica</pre> 
+						 <div class="page-header">
+                <h1 class="titulo">  G A L E R I A  </h1>
+              </div>
 								<div id="slides">
 								    <img src="<?php echo base_url();?>img/especial/0.jpg">
 								    <img src="<?php echo base_url();?>img/especial/1.jpg">
@@ -253,14 +256,6 @@ strong.txt-white{
            	</div>
             <div class="row">
               <div class="col-md-12">
-              	<!--
-              	<ul class="list-inline">
-                  <li><a href="http://getbootstrap.com" title="Official Bootstrap Site" rel="nofollow">Bootstrap</a></li>
-                  <li><a href="http://expo.getbootstrap.com" title="Showcase of Bootstrap excellence" rel="nofollow">Expo</a></li>
-                  <li><a href="http://www.bootbundle.com" title="Download free Bootstrap themes, templates and snippets" rel="nofollow" target="ext">BootBundle</a></li>
-                  <li><a href="http://bootstrapbay.com/?ref=skelly" rel="nofollow" target="ext">BootstrapBay</a></li>
-                  <li><a href="http://www.bootply.com" title="Bootstrap Editor and playground" rel="nofollow" target="ext">Bootply</a></li>
-                </ul> -->
               </div>
             </div>
           </div>

@@ -131,9 +131,14 @@
 									  </div>
 
 									  <div class="form-group">
-									    <label for="capacidad" class="col-sm-2 control-label">Capacidad de alumnos</label>
-									    <div class="col-sm-10">
-									      <input type="number" name="capacidad" min="1" max="30"class="form-control" id="capacidad" name="capacidad" placeholder="Capacidad de alumnos (10) (20) (30)" required>
+									    <label for="capacidad" class="col-sm-4 control-label">Capacidad de alumnos</label>
+									    <div class="col-sm-8">
+									      <!-- <input type="number" name="capacidad" min="10" max="30"class="form-control" id="capacidad" name="capacidad" placeholder="Capacidad de alumnos (10) (20) (30)" required> -->
+									    	<select name="capacidad">
+									    		<option value="10">10</option>
+									    		<option value="20">20</option>
+									    		<option value="30">30</option>
+									    	</select>
 									    </div>
 									  </div>
 

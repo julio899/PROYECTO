@@ -1,3 +1,9 @@
+<?php 
+
+#inicializo variables
+$usuario=$this->session->userdata('datos_usuarios');
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -188,6 +194,14 @@ background-size: cover;
 div.av-modal{
 	padding: 30px;
 }
+p#men-alumno{
+	font-size: 20px;
+}
+p.usu-identificador{
+	font-size: 20px;
+	padding-right: 10px;
+	padding-top: 10px;
+}
 </style>
 
   <script>
@@ -227,8 +241,11 @@ if($datos_session['tipo']=='A'):
 					<li><a href="<?php echo base_url().index_page().'/administrador/soporte'; ?>" class="texto-menu">Soporte</a></li>
 				</ul>
 
-				<ul class="nav navbar-nav navbar-right"><li><p class="contenedor-btn"><a href="<?php echo base_url().index_page()."/administrador/cerrar_session";?>" class="btn btn-danger">Cerrar Seci&oacute;n</a></p></li>
-				<li><p class="contenedor-btn"><a href="" id="btnCrearCuenta" class="btn btn-primary" >Creacion de Cuentas</a></p></li>
+				<ul class="nav navbar-nav navbar-right">
+					<li><p class="usu-identificador">Bienvenido <?php echo $usuario['nombre_completo'];?></p></li>
+					<li><p class="contenedor-btn"><a href="<?php echo base_url().index_page()."/administrador/cerrar_session";?>" class="btn btn-danger">Cerrar Seci&oacute;n</a></p></li>
+					<li><p class="contenedor-btn"><a href="" id="btnCrearCuenta" class="btn btn-primary" >Creacion de Cuentas</a></p></li>
+
 				</ul>
 			</div>
 
@@ -264,6 +281,7 @@ if($datos_session['tipo']=='D'):
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+					<li><p class="usu-identificador">Bienvenido <?php echo $usuario['nombre_completo'];?></p></li>
 					<li><p class="contenedor-btn"><a href="<?php echo base_url().index_page()."/docente/cerrar_session";?>" class="btn btn-danger">Cerrar Seci&oacute;n</a></p></li>
 					<?php if($datos_session['tipo']=='A'):?>
 					<li><p class="contenedor-btn"><a href="" id="btnCrearCuenta" class="btn btn-primary" >Creacion de Cuentas</a></p></li>

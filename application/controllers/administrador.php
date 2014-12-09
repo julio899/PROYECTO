@@ -33,6 +33,7 @@ class Administrador extends CI_Controller {
 	}
 
 	function registrarDocente(){
+
 		$this->datos_temporal=$this->input->post();
 		$this->load->model('data');
 		if($this->datos_temporal['clave']==$this->datos_temporal['reclave']){
@@ -45,9 +46,8 @@ class Administrador extends CI_Controller {
 	} // fin de la fin de la funcion registrarDocente
 	
 	function registroSeccion(){
-		$this->datos_temporal=$this->input->post();
 		$this->load->model('data');
-		if($this->data->crear_seccion($this->datos_temporal)){
+		if($this->data->crear_seccion($this->input->post())){
 
 			$this->session->set_flashdata('ok','LA SECCION SE CREO SATISFACTORIAMENTE');
 			redirect('administrador','refreh');
