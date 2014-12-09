@@ -13,13 +13,15 @@ class Docente extends CI_Controller {
 			$this->carga_en_session_las_secciones();
 			$this->validacionDocente();
 			
-		$this->datos_secciones=$this->data->traer_secciones();
-		$this->session->set_userdata('secciones_registradas',$this->datos_secciones);
 		# primera funcion que ejecuta el docente 	
 			$this->load->view('html/cabecera');
 			$this->load->view('contenido_docente');
 			$this->load->view('html/pie_pagina');
 	}
+    function probador(){
+    	$this->load->model('data');
+		return $this->data->traer_secciones();
+    }
 
 	function carga_en_session_a_docentes(){
 		$this->load->model('data');
@@ -28,8 +30,7 @@ class Docente extends CI_Controller {
 	}
 	function carga_en_session_las_secciones(){
 		$this->load->model('data');
-		$this->datos_secciones=$this->data->traer_secciones();
-		$this->session->set_userdata('secciones_registradas',$this->datos_secciones);
+		$this->session->set_userdata('secciones_registradas',$this->data->traer_secciones());
 	}
 
 	function registro_alumno(){
@@ -60,9 +61,12 @@ class Docente extends CI_Controller {
 
 	function seleccionar_seccion($secc_select=""){
 		$this->load->model('data');
-		$this->session->set_flashdata('selecciono_seccion', array('id' => $secc_select, 'alumnos'=>$this->data->traer_alumnos_inscritos($secc_select)) );
-		redirect('docente','refreh');
-				
+		//$this->session->set_userdata('selecciono_seccion', array('id' => $secc_select, 'alumnos'=>$this->data->traer_alumnos_inscritos($secc_select)) );
+		//redirect('docente','refreh');
+		
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_docente', array('todas_secciones'=>$this->data->traer_secciones(), 'selecciono_seccion'=>array('id' => $secc_select, 'alumnos'=>$this->data->traer_alumnos_inscritos($secc_select))));
+		$this->load->view('html/pie_pagina');
 	} //fin de seleccionar_seccion
 	
 
@@ -77,6 +81,8 @@ class Docente extends CI_Controller {
 	}//fin de cargar_avance
 
 	function cerrar_session(){
+			$this->load->model('data');
+			$this->data->reg_auditoria_salida();
 			$this->session->sess_destroy();
 			redirect('','refreh');
 	}//fin de cerrar_session
@@ -96,6 +102,16 @@ class Docente extends CI_Controller {
 			$this->session->set_flashdata('error','No se pudo registrar el Avance');
 		}
 
+		redirect('docente','refreh');
+	}
+
+	function cambiar_alumno_seccion(){
+		$this->load->model('data');
+		if ($this->data->cambiar_seccion_alumno( $this->input->post() ) ) {
+			$this->session->set_flashdata('ok','CAMBIO DE SECCION PROCESADO SATISFACTORIAMENTE');
+		}else{
+			$this->session->set_flashdata('error','No se pudo realizar el cambio');
+		}
 		redirect('docente','refreh');
 	}
 }

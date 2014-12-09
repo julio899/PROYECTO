@@ -18,6 +18,9 @@ class Administrador extends CI_Controller {
 	}
 
 	function cerrar_session(){
+		
+			$this->load->model('data');
+			$this->data->reg_auditoria_salida();
 			$this->session->sess_destroy();
 			redirect('','refreh');
 	}//fin de cerrar_session

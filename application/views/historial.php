@@ -57,10 +57,11 @@
 			<table class="table table-striped">
                         <thead>
                           <tr>
-                            <th>#INGRESO NRO</th>
+                            <th>#NRO Control</th>
                             <th>FECHA</th>
                             <th>USUARIO</th>
                             <th>Direccion IP</th>
+                            <th>ACCION</th>
                             <th>TIPO</th>
                           </tr>
                         </thead>
@@ -81,6 +82,7 @@
                             <td>". date_format(date_create($datos[$i]['fecha']), 'd-m-Y H:i:s')."</td>
                             <td>".$datos[$i]['usuario']."</td>
                             <td>".$datos[$i]['ip']."</td>
+                            <td>".$datos[$i]['accion']."</td>
                             <td>$tipo</td>
                           </tr>";
                             }

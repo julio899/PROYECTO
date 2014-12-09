@@ -466,7 +466,7 @@ if(isset($avance)):
 
 							        	<div class="list-group">
 							        	<?php
-							        			$secciones=$this->session->userdata('secciones_docente');
+						        				$secciones=$this->session->userdata('secciones_docente');
 							        			for ($i=0; $i < count($secciones); $i++) { 
 							        				# Imprimo Las Secciones
 							        				echo '<a href="'.base_url().index_page().'/docente/seleccionar_seccion/'.$secciones[$i]['id'].'" class="list-group-item"><h4 class="list-group-item-heading">Seccion [ <span class="label label-success">'.$secciones[$i]['seccion'].'</span> ]</h4><p class="list-group-item-text">Grado : <span class="label label-warning">'.$secciones[$i]['grado'].'</span> / capacidad de Alumnos: <span class="badge">'.$secciones[$i]['cap_alumnos'].'</span> Turno: 	<span class="label label-info">'.$secciones[$i]['turno'].'</span></p></a>';
@@ -487,49 +487,14 @@ if(isset($avance)):
 
 
 <?php 
-if($this->session->flashdata('selecciono_seccion') && !isset($avance)): 
-$seccion=$this->session->flashdata('selecciono_seccion');
+if(isset($selecciono_seccion['id']) && !isset($avance)): 
+$seccion=$selecciono_seccion;
+
 $secciones_docente=$this->session->userdata('secciones_docente');
+
+//var_dump($todas_secciones);
+//exit();
 ?>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-    <form action="#" method="post" class="form-horizontal">
-        				
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Cambiar de Seccion a este Alumno</h4>
-      </div>
-      <div class="modal-body">
-        		<div class="bs-callout bs-callout-danger">
-        			<pre>Tenga Cuidado ya que al cambiar al alumno<br> ya no estara en esta secci&oacute;n.</pre>
-        			
-        			<select name="seccion" id="seccion_nueva" class="form-control">
-        				<option value="null">Seleccione la Nueva secci&oacute;n</option>
-        				<?php 
-        					$todas_secciones=$this->session->userdata('secciones_registradas');
-        					for($t=0;$t<count($todas_secciones);$t++){
-        						echo '<option value="'.$todas_secciones[$t]['id'].'">GRADO: '.$todas_secciones[$t]['grado'].' - SECCI&Oacute;N: '.$todas_secciones[$t]['seccion'].' - DOCENTE: '.$todas_secciones[$t]['nombre_docente'].'</option>';
-        					}
-        				?>
-        			</select>
-        			<?php var_dump($secciones_docente);?>
-        		</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">cancelar</button>
-        <button type="submit" class="btn btn-danger">Ejecutar CAMBIO</button>
-      </div>
-
-	</form>
-
-    </div>
-  </div>
-</div>
-<!-- Fin de Modal Cambo de seccion -->
-
 
 	<!--  si selecciona Una seccion especifica	-->
 	<div class="col-md-9 docs">
@@ -541,8 +506,8 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 			if ($secciones_docente[$i]['id']==$seccion['id']) {
 							$seccion_grado_seleccionada="<span class=\"label label-warning\">".$secciones_docente[$i]['seccion']."</span> Grado: <span class=\"label label-info\">".$secciones_docente[$i]['grado']."</span>";
 							# Describimos la seccion
-							echo "<br>Secci&oacute;n : ".$secciones_docente[$i]['seccion'];
-							echo "  Grado : ".$secciones_docente[$i]['grado'];
+							echo "<br>Secci&oacute;n : <span class=\"label label-warning\">".$secciones_docente[$i]['seccion']."</span>";
+							echo "  Grado : <span class=\"label label-success\">".$secciones_docente[$i]['grado']."</span>";
 							echo "<br>Cantidad de Alumnos Inscritos: <span class=\"label label-info\">".count($seccion['alumnos'])."</span>";
 							echo "  - CAPACIDAD DE [".$secciones_docente[$i]['cap_alumnos']."] ALUMNOS";
 							//var_dump($seccion['alumnos']);
@@ -574,7 +539,51 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 		        	for ($a=0; $a < count($alumnos); $a++) { 
 		        		$btn_cargar_avance='<button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Cargar Avances" data-original-title="Cargar Avances"><span class="glyphicon glyphicon-export" aria-hidden="true"></span></button>';
 		        		$btn_actualizar='<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Actualizar Datos" data-original-title="Actualizar Datos"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>';
-		        		$btn_cambiar_de_seccion='<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-random" aria-hidden="true"></span></button>';
+		        		$btn_cambiar_de_seccion='<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalcambiar'.$alumnos[$a]['id'].'" ><span class="glyphicon glyphicon-random" aria-hidden="true"></span></button>';
+		        		$modal_cambio_seccion="
+<!-- Modal -->
+<div class=\"modal fade\" id=\"modalcambiar".$alumnos[$a]['id']."\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
+  <div class=\"modal-dialog\">
+    <div class=\"modal-content\">
+
+    <form action=\"".base_url().index_page()."/docente/cambiar_alumno_seccion\" method=\"post\" class=\"form-horizontal\">
+        				
+      <div class=\"modal-header\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only \">Cerrar</span></button>
+        <h4 class=\"modal-title\" id=\"myModalLabel\">Cambiar de Seccion a este Alumno ". strtoupper($alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])." </h4>
+      </div>
+      <div class=\"modal-body\">
+        		<div class=\"bs-callout bs-callout-danger\">
+        			<pre>Tenga Cuidado ya que al cambiar al alumno<br> ya no estara en esta secci&oacute;n.</pre>
+        			<input type=\"hidden\" name=\"id_alumno\" value=\"".$alumnos[$a]['id']."\">
+        			<select name=\"seccion\" id=\"seccion_nueva\" class=\"form-control\">
+        				<option value=\"null\">Seleccione la Nueva secci&oacute;n</option>
+        				";
+        					//$todas_secciones=$this->session->userdata('secciones_registradas');
+
+
+        					$opcciones_secciones="";
+        					for($t=0;$t<count($todas_secciones);$t++){
+        						$opcciones_secciones.='<option value="'.$todas_secciones[$t]['id'].'">GRADO: '.$todas_secciones[$t]['grado'].' - SECCI&Oacute;N: '.$todas_secciones[$t]['seccion'].' - DOCENTE: '.$todas_secciones[$t]['nombre_docente'].'</option>';
+        					}
+        				$modal_cambio_seccion.=$opcciones_secciones."
+        			</select>
+        			
+        		</div>
+      </div>
+      <div class=\"modal-footer\">
+        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">cancelar</button>
+        <button type=\"submit\" class=\"btn btn-danger\">Ejecutar CAMBIO</button>
+      </div>
+
+	</form>
+
+    </div>
+  </div>
+</div>
+<!-- Fin de Modal Cambo de seccion -->
+";
+echo $modal_cambio_seccion;
 		        		$btn_info_avances='<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Ver Avances" data-original-title="Ver Avances"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>';
 		        		# imprimimos cuerpo de tabla
 		        		echo "<tr><td>".($a+1)."</td><td>".strtoupper( $alumnos[$a]['nombres']." ".$alumnos[$a]['apellidos'])."</td><td>".strtoupper($alumnos[$a]['representante'])."</td><td>".$alumnos[$a]['edad']."</td><td> <a href=\"".base_url().index_page()."/docente/cargar_avance/".$alumnos[$a]['id']."\"> $btn_cargar_avance </a>  <a href=\"#\"> $btn_actualizar </a>   <a href=\"#\"> $btn_cambiar_de_seccion </a>   <a href=\" ".base_url().index_page().'/docente/avances_alumno/'.$alumnos[$a]['id']." \"> $btn_info_avances </a> </td></tr>";
@@ -617,7 +626,7 @@ $secciones_docente=$this->session->userdata('secciones_docente');
 
 
 
-<?php if(!isset($avance_alumno) && !$this->session->flashdata('registroAlumno') && !$this->session->flashdata('selecciono_seccion') && !isset($avance) ):?>
+<?php if(!isset($avance_alumno) && !$this->session->flashdata('registroAlumno') && !isset($selecciono_seccion['id']) && !isset($avance) ):?>
 			<!-- Contenido Central -->
 			<div class="col-md-9 docs">
 						<h1 id="getting-started">Bienvenido <?php echo $usuario['nombre_completo'];?> al panel del Docente</h1>

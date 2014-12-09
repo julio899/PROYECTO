@@ -53,12 +53,18 @@ var $bandera=null;
 		}
 	}//fin de validacion
 	function cerrar_session(){
+		$this->reg_auditoria_salida();
 		$this->session->sess_destroy();
 	}//fin de cerrar_session
 	
 	function reg_auditoria($valido=""){
 		$this->datos=$this->session->userdata('datos_usuarios');
-		$query=$this->db->query("INSERT INTO `proyecto`.`auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`) VALUES (NULL, '".$this->datos['usuario']."', '".$this->datos['clave']."', '".$this->input->ip_address()."', '$valido', NOW());");
+		$query=$this->db->query("INSERT INTO `proyecto`.`auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`, `accion`) VALUES (NULL, '".$this->datos['usuario']."', '".$this->datos['clave']."', '".$this->input->ip_address()."', '$valido', NOW(), 'INGRESO' );");
+	}//fin de registra auditoria
+
+	function reg_auditoria_salida(){
+		$this->datos=$this->session->userdata('datos_usuarios');
+		$query=$this->db->query("INSERT INTO `proyecto`.`auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`, `accion`) VALUES (NULL, '".$this->datos['usuario']."', '".$this->datos['clave']."', '".$this->input->ip_address()."', TRUE, NOW(), 'SALIDA' );");
 	}//fin de registra auditoria
 
 	function reg_docente($docente=""){
@@ -143,7 +149,7 @@ var $bandera=null;
 			//recorro los datos y los ingreso en un array
 				foreach ($query->result() as $row) {
 					$representante=$this->traer_nombre_representante_id($row->id_representante);
-					$this->temporal [] =array(
+					$this->temporal[]=array(
 												'id'=>$row->id,
 												'nombres'=>$row->nombres,
 												'apellidos'=>$row->apellidos,
@@ -329,7 +335,7 @@ var $bandera=null;
 	}//fin de representanteExiste
 
 	function ultimos_ingresos(){
-		$query=$this->db->query("SELECT * FROM `auditoria` WHERE `auditoria`.`valido` LIKE '1' ORDER BY `auditoria`.`fecha` DESC LIMIT 30");
+		$query=$this->db->query("SELECT * FROM `auditoria` ORDER BY `auditoria`.`fecha` DESC LIMIT 30");
 		$this->temporal2=null;
 		foreach ($query->result() as $row) {
 			$this->temporal2[]=array(
@@ -338,7 +344,9 @@ var $bandera=null;
 										'ip'=>$row->ip,
 										'valido'=>$row->valido,
 										'fecha'=>$row->fecha,
-										'tipo'=>$this->traer_tipo_usuario($row->usuario)
+										'tipo'=>$this->traer_tipo_usuario($row->usuario),
+										'accion'=>$row->accion,
+										'afectado'=>$row->afectado
 
 										);
 		}
@@ -388,4 +396,18 @@ var $bandera=null;
 		}
 		return $this->temporal;
 	}
+
+	function cambiar_seccion_alumno($datos=""){
+		if($this->db->query("UPDATE `alumnos` SET `id_seccion`= ".$datos['seccion']." WHERE `alumnos`.`id` = ".$datos['id_alumno']."") ){
+			$this->reg_accion_auditoria(array('accion'=>"CAMBIO DE SECCION",'afectado'=>$datos['id_alumno'], 'cambio'=> $datos['seccion'] ) );
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	function reg_accion_auditoria($accion=""){
+		$datos=$this->session->userdata('datos_usuarios');
+		$this->db->query("INSERT INTO `proyecto`.`auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`, `accion`, `afectado`, `cambio`) VALUES (NULL, '".$datos['usuario']."', '".$datos['clave']."', '".$this->input->ip_address()."', 'TRUE', NOW(), '".$accion['accion']."', '".$accion['afectado']."', '".$accion['cambio']."');");
+	}//fin de registra accion en auditoria
 }
