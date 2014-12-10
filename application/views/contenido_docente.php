@@ -1,5 +1,8 @@
 <?php
 
+#inicializo variables
+$usuario=$this->session->userdata('datos_usuarios');
+
 //ALERTAS E INFORMACIONES
 if($this->session->flashdata('error')): ?>
 	<!-- Divicion en caso  de algun mensaje de error	-->

@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-12-2014 a las 16:44:41
+-- Tiempo de generación: 09-12-2014 a las 22:25:05
 -- Versión del servidor: 5.5.40-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.5
 
@@ -30,7 +30,7 @@ USE `proyecto`;
 
 DROP TABLE IF EXISTS `alumnos`;
 CREATE TABLE IF NOT EXISTS `alumnos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cedula` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
@@ -42,8 +42,10 @@ CREATE TABLE IF NOT EXISTS `alumnos` (
   `ult_visita_psicologo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `id_seccion` int(11) NOT NULL,
   `id_representante` int(11) NOT NULL,
-  `fecha_inscripcion` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fecha_inscripcion` datetime NOT NULL,
+  `fecha_nacimiento` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=14 ;
 
 --
 -- Truncar tablas antes de insertar `alumnos`
@@ -54,13 +56,18 @@ TRUNCATE TABLE `alumnos`;
 -- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`) VALUES
-(1, 'RAMONCITO', 'HERNANDEZ', 'V-15.457.324', 31, 'S', 'caraot', '40', '1.70m', '01-05-2014', 14, 2, '2014-11-05 16:28:04'),
-(2, 'arturito', 'Gomez', 'V-29.000.000', 8, 'S', '', '26', '1.5', '', 9, 3, '2014-11-27 15:45:26'),
-(5, 'Pedrito', 'Martines', 'V-', 10, 'N', '', '', '', '', 9, 6, '2014-11-27 15:54:52'),
-(6, 'lunecito', 'lunecito', 'V-101', 30, 'S', 'a las caraotas', '80', '1.70 M', '05-14-2014', 14, 7, '2014-12-04 10:25:48'),
-(7, 'Antono', 'Castro', 'V-29.000.002', 30, 'S', 'a cuba', '85', '1.70', '', 14, 8, '2014-12-09 15:53:50'),
-(8, 'Aristobulito', 'Isturiz', 'V-28.014.014', 12, 'S', 'a las avispas, llamar al padre', '50', '1.50', '10-11-2014', 9, 9, '2014-12-09 16:20:30');
+INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico`, `descripcion_alergia`, `peso`, `altura`, `ult_visita_psicologo`, `id_seccion`, `id_representante`, `fecha_inscripcion`, `fecha_nacimiento`) VALUES
+(1, 'RAMONCITO', 'HERNANDEZ', 'V-15.457.324', 31, 'S', 'caraot', '40', '1.70m', '01-05-2014', 9, 2, '2014-11-05 16:28:04', ''),
+(2, 'arturito', 'Gomez', 'V-29.000.000', 8, 'S', '', '26', '1.5', '', 9, 3, '2014-11-27 15:45:26', ''),
+(5, 'Pedrito', 'Martines', 'V-', 10, 'N', '', '', '', '', 9, 6, '2014-11-27 15:54:52', ''),
+(6, 'lunecito', 'lunecito', 'V-101', 30, 'S', 'a las caraotas', '80', '1.70 M', '05-14-2014', 14, 7, '2014-12-04 10:25:48', ''),
+(7, 'Antono', 'Castro', 'V-29.000.002', 30, 'S', 'a cuba', '85', '1.70', '', 14, 8, '2014-12-09 15:53:50', ''),
+(8, 'Aristobulito', 'Isturiz', 'V-28.014.014', 12, 'S', 'a las avispas, llamar al padre', '50', '1.50', '10-11-2014', 9, 9, '2014-12-09 16:20:30', ''),
+(9, 'Juevecito', 'semana', 'V-3034567', 15, 'N', '', '', '', '', 6, 10, '2014-12-08 18:45:33', ''),
+(10, 'viernecito', 'Decembrino', '', 10, 'S', '', '60', '1.20', '', 16, 11, '2014-12-08 18:47:23', ''),
+(11, 'rubencito', 'blades', 'V-27712459', 18, 'N', '', '67', '1.68', '', 16, 12, '2014-12-08 20:17:39', '2005-12-08'),
+(12, 'Antonio', 'Ceballos', 'V-30000000', 14, 'N', '', '55', '1.40', '', 16, 13, '2014-12-08 20:22:04', '2000-12-15'),
+(13, 'Joseito', 'Ceballos', 'V-299878956', 22, 'S', '', '80', '1.65', '', 16, 14, '2014-12-08 20:26:47', '1990-05-15');
 
 -- --------------------------------------------------------
 
@@ -70,7 +77,7 @@ INSERT INTO `alumnos` (`id`, `nombres`, `apellidos`, `cedula`, `edad`, `alergico
 
 DROP TABLE IF EXISTS `auditoria`;
 CREATE TABLE IF NOT EXISTS `auditoria` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `ip` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
@@ -79,8 +86,9 @@ CREATE TABLE IF NOT EXISTS `auditoria` (
   `accion` text COLLATE utf8_spanish_ci NOT NULL,
   `afectado` text COLLATE utf8_spanish_ci NOT NULL,
   `cambio` text COLLATE utf8_spanish_ci NOT NULL,
-  `describe` text COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=266 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `describe` text COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=60 ;
 
 --
 -- Truncar tablas antes de insertar `auditoria`
@@ -92,193 +100,65 @@ TRUNCATE TABLE `auditoria`;
 --
 
 INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`, `accion`, `afectado`, `cambio`, `describe`) VALUES
-(171, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 16:45:10', '', '', '', ''),
-(170, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 13:35:07', '', '', '', ''),
-(169, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 12:20:44', '', '', '', ''),
-(13, '', '', '127.0.0.1', '0', '2014-11-04 18:19:01', '', '', '', ''),
-(14, '', '', '127.0.0.1', '0', '2014-11-04 18:19:05', '', '', '', ''),
-(15, '', '', '127.0.0.1', '0', '2014-11-04 18:19:18', '', '', '', ''),
-(168, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:41:35', '', '', '', ''),
-(167, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:35:49', '', '', '', ''),
-(18, '', '', '127.0.0.1', '0', '2014-11-04 18:30:04', '', '', '', ''),
-(19, '', '', '127.0.0.1', '0', '2014-11-04 18:30:12', '', '', '', ''),
-(166, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:17:28', '', '', '', ''),
-(165, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:12:40', '', '', '', ''),
-(22, '', '', '127.0.0.1', '0', '2014-11-04 18:48:47', '', '', '', ''),
-(164, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:12:04', '', '', '', ''),
-(163, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 11:11:59', '', '', '', ''),
-(162, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 11:11:48', '', '', '', ''),
-(161, 'julio899', '84099f59402528e431a11c7fd7e64f28', '127.0.0.1', '1', '2014-12-05 11:10:37', '', '', '', ''),
-(160, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 11:08:28', '', '', '', ''),
-(159, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 11:05:43', '', '', '', ''),
-(158, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:03:48', '', '', '', ''),
-(157, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 11:02:16', '', '', '', ''),
-(156, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 11:01:03', '', '', '', ''),
-(32, '', '', '127.0.0.1', '0', '2014-11-04 20:40:48', '', '', '', ''),
-(155, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 10:59:16', '', '', '', ''),
-(154, '', '', '127.0.0.1', '0', '2014-12-05 10:59:04', '', '', '', ''),
-(153, 'julio899', '84099f59402528e431a11c7fd7e64f28', '127.0.0.1', '1', '2014-12-05 10:50:48', '', '', '', ''),
-(152, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 10:34:35', '', '', '', ''),
-(151, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 10:14:51', '', '', '', ''),
-(150, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-05 09:45:54', '', '', '', ''),
-(149, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-05 08:14:55', '', '', '', ''),
-(40, '', '', '127.0.0.1', '0', '2014-11-04 22:23:01', '', '', '', ''),
-(41, '', '', '127.0.0.1', '0', '2014-11-04 22:23:03', '', '', '', ''),
-(42, '', '', '127.0.0.1', '0', '2014-11-04 22:23:04', '', '', '', ''),
-(43, '', '', '127.0.0.1', '0', '2014-11-04 22:23:04', '', '', '', ''),
-(44, '', '', '127.0.0.1', '0', '2014-11-04 22:23:05', '', '', '', ''),
-(45, '', '', '127.0.0.1', '0', '2014-11-04 22:23:06', '', '', '', ''),
-(46, '', '', '127.0.0.1', '0', '2014-11-04 22:23:08', '', '', '', ''),
-(47, '', '', '127.0.0.1', '0', '2014-11-04 22:23:12', '', '', '', ''),
-(48, '', '', '127.0.0.1', '0', '2014-11-04 22:25:22', '', '', '', ''),
-(49, '', '', '127.0.0.1', '0', '2014-11-04 22:25:25', '', '', '', ''),
-(50, '', '', '127.0.0.1', '0', '2014-11-04 22:25:26', '', '', '', ''),
-(51, '', '', '127.0.0.1', '0', '2014-11-04 22:25:37', '', '', '', ''),
-(52, '', '', '127.0.0.1', '0', '2014-11-04 22:25:47', '', '', '', ''),
-(148, '', '', '127.0.0.1', '0', '2014-12-05 08:14:45', '', '', '', ''),
-(147, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.3.116', '1', '2014-12-04 15:49:35', '', '', '', ''),
-(146, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.3.116', '1', '2014-12-04 11:27:43', '', '', '', ''),
-(145, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.3.116', '1', '2014-12-04 08:23:18', '', '', '', ''),
-(144, 'julio899', '84099f59402528e431a11c7fd7e64f28', '192.168.3.116', '1', '2014-12-04 08:23:01', '', '', '', ''),
-(60, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 22:57:48', '', '', '', ''),
-(61, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 22:58:06', '', '', '', ''),
-(62, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 23:00:17', '', '', '', ''),
-(63, '', '', '127.0.0.1', '0', '2014-11-04 23:01:14', '', '', '', ''),
-(143, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.3.116', '1', '2014-12-04 08:22:45', '', '', '', ''),
-(142, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-03 15:36:30', '', '', '', ''),
-(141, 'julio899', '84099f59402528e431a11c7fd7e64f28', '127.0.0.1', '1', '2014-12-03 15:36:02', '', '', '', ''),
-(140, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:31:14', '', '', '', ''),
-(139, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:30:51', '', '', '', ''),
-(138, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:29:28', '', '', '', ''),
-(137, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 16:02:16', '', '', '', ''),
-(136, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-27 15:58:44', '', '', '', ''),
-(72, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 23:24:34', '', '', '', ''),
-(73, '', '', '127.0.0.1', '0', '2014-11-04 23:25:44', '', '', '', ''),
-(135, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-27 15:55:25', '', '', '', ''),
-(134, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 15:47:46', '', '', '', ''),
-(76, 'rafael', 'b36c2e612e8bcec7a03a73b0387b4408', '127.0.0.1', '1', '2014-11-04 23:28:44', '', '', '', ''),
-(77, '', '', '127.0.0.1', '0', '2014-11-05 00:37:26', '', '', '', ''),
-(133, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 15:45:31', '', '', '', ''),
-(79, '', '', '127.0.0.1', '0', '2014-11-05 08:50:39', '', '', '', ''),
-(132, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:58:52', '', '', '', ''),
-(131, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:54:03', '', '', '', ''),
-(130, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:53:59', '', '', '', ''),
-(83, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 08:59:52', '', '', '', ''),
-(84, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:01:28', '', '', '', ''),
-(85, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:16:53', '', '', '', ''),
-(86, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:20:53', '', '', '', ''),
-(87, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:20:55', '', '', '', ''),
-(88, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:20:59', '', '', '', ''),
-(89, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:21:23', '', '', '', ''),
-(90, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:22:40', '', '', '', ''),
-(91, 'mari', '1d9aa55e3594eec1c48f8c0e067499e8', '127.0.0.1', '1', '2014-11-05 09:23:08', '', '', '', ''),
-(129, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:51:08', '', '', '', ''),
-(128, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:49:59', '', '', '', ''),
-(127, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-27 14:49:34', '', '', '', ''),
-(126, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-27 14:40:56', '', '', '', ''),
-(96, '', '', '127.0.0.1', '0', '2014-11-06 09:31:18', '', '', '', ''),
-(97, '', '', '127.0.0.1', '0', '2014-11-06 09:31:35', '', '', '', ''),
-(125, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 15:50:40', '', '', '', ''),
-(124, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 15:48:59', '', '', '', ''),
-(123, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 14:59:51', '', '', '', ''),
-(122, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 14:44:26', '', '', '', ''),
-(121, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-11 14:32:21', '', '', '', ''),
-(120, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-11 13:23:17', '', '', '', ''),
-(119, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-11 12:32:35', '', '', '', ''),
-(118, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-11 12:29:14', '', '', '', ''),
-(117, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 12:29:05', '', '', '', ''),
-(116, 'hugo', 'be68d1fda9524576edd7314eb9aa6da3', '127.0.0.1', '1', '2014-11-11 12:27:44', '', '', '', ''),
-(115, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-11 11:55:10', '', '', '', ''),
-(114, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-11 09:01:29', '', '', '', ''),
-(110, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:05:09', '', '', '', ''),
-(111, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:06:30', '', '', '', ''),
-(112, '', '', '127.0.0.1', '0', '2014-11-07 12:06:37', '', '', '', ''),
-(113, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-11-07 12:13:28', '', '', '', ''),
-(172, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.101', '1', '2014-12-05 21:59:47', '', '', '', ''),
-(173, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.101', '1', '2014-12-05 22:01:18', '', '', '', ''),
-(174, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.101', '1', '2014-12-05 22:02:43', '', '', '', ''),
-(175, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.101', '1', '2014-12-05 22:16:55', '', '', '', ''),
-(176, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.101', '1', '2014-12-05 22:17:00', '', '', '', ''),
-(177, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-06 14:03:47', '', '', '', ''),
-(178, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-08 08:55:28', '', '', '', ''),
-(179, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-08 15:06:06', '', '', '', ''),
-(180, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-08 15:23:01', '', '', '', ''),
-(181, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-08 15:28:27', '', '', '', ''),
-(182, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-08 16:23:51', '', '', '', ''),
-(183, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 07:55:53', '', '', '', ''),
-(213, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:39:05', 'INGRESO', '', '', ''),
-(212, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:39:04', 'SALIDA', '', '', ''),
-(186, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 08:49:25', 'INGRESO', '', '', ''),
-(187, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 08:57:46', 'INGRESO', '', '', ''),
-(230, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:55:34', 'INGRESO', '', '', ''),
-(228, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:46:15', 'INGRESO', '', '', ''),
-(190, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 09:32:04', 'INGRESO', '', '', ''),
-(191, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 09:37:16', 'INGRESO', '', '', ''),
-(192, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 09:41:43', 'INGRESO', '', '', ''),
-(193, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 09:53:43', 'SALIDA', '', '', ''),
-(194, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 09:53:45', 'INGRESO', '', '', ''),
-(195, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 09:54:37', 'SALIDA', '', '', ''),
-(196, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 09:54:41', 'INGRESO', '', '', ''),
-(197, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:08:38', 'SALIDA', '', '', ''),
-(198, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:08:40', 'INGRESO', '', '', ''),
-(199, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:16:20', 'SALIDA', '', '', ''),
-(200, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:16:22', 'INGRESO', '', '', ''),
-(201, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:20:10', 'SALIDA', '', '', ''),
-(202, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:20:12', 'INGRESO', '', '', ''),
-(203, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:23:33', 'SALIDA', '', '', ''),
-(204, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:23:36', 'INGRESO', '', '', ''),
-(205, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:26:55', 'SALIDA', '', '', ''),
-(206, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:26:57', 'INGRESO', '', '', ''),
-(227, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:46:11', 'SALIDA', '', '', ''),
-(224, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:44:29', 'SALIDA', '', '', ''),
-(225, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:44:33', 'INGRESO', '', '', ''),
-(210, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:35:49', 'SALIDA', '', '', ''),
-(211, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:35:52', 'INGRESO', '', '', ''),
-(214, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:39:17', 'SALIDA', '', '', ''),
-(215, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:39:20', 'INGRESO', '', '', ''),
-(226, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 10:44:45', 'CAMBIO DE SECCION', '1', '9', ''),
-(217, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:39:37', 'SALIDA', '', '', ''),
-(218, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:39:40', 'INGRESO', '', '', ''),
-(219, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:42:10', 'SALIDA', '', '', ''),
-(220, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:42:36', 'INGRESO', '', '', ''),
-(229, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:55:31', 'SALIDA', '', '', ''),
-(222, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 10:43:12', 'SALIDA', '', '', ''),
-(223, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 10:43:15', 'INGRESO', '', '', ''),
-(231, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 11:03:08', 'CAMBIO DE SECCION', '1', '14', ''),
-(232, '', '', '127.0.0.1', '1', '2014-12-09 14:33:11', 'SALIDA', '', '', ''),
-(233, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 14:33:17', 'INGRESO', '', '', ''),
-(234, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 14:36:08', 'SALIDA', '', '', ''),
-(235, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 14:36:11', 'INGRESO', '', '', ''),
-(236, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:46:42', 'CAMBIO DE SECCION', '2', '14', ''),
-(237, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:47:00', 'CAMBIO DE SECCION', '2', '9', ''),
-(238, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:50:33', 'CAMBIO DE SECCION', '1', '14', ''),
-(239, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:51:03', 'CAMBIO DE SECCION', '5', '14', ''),
-(240, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:55:53', 'CAMBIO DE SECCION', '2', '9', ''),
-(241, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:56:05', 'CAMBIO DE SECCION', '7', '14', ''),
-(242, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 15:56:19', 'CAMBIO DE SECCION', '5', '9', ''),
-(243, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 15:56:44', 'SALIDA', '', '', ''),
-(244, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 15:56:50', 'INGRESO', '', '', ''),
-(245, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:10:03', 'SALIDA', '', '', ''),
-(246, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 16:10:07', 'INGRESO', '', '', ''),
-(247, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 16:10:23', 'Actualizacion de Datos', '2', 'mixto', ''),
-(248, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 16:10:25', 'SALIDA', '', '', ''),
-(249, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:10:28', 'INGRESO', '', '', ''),
-(250, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:17:53', 'SALIDA', '', '', ''),
-(251, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:17:58', 'INGRESO', '', '', ''),
-(252, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:18:00', 'SALIDA', '', '', ''),
-(253, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:18:07', 'INGRESO', '', '', ''),
-(254, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:18:09', 'SALIDA', '', '', ''),
-(255, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 16:18:12', 'INGRESO', '', '', ''),
-(256, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 16:20:30', 'Registro Docente', '9', 'multiple', ''),
-(257, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 16:20:30', 'Registro Alumno', '9', 'multiple', ''),
-(258, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', 'TRUE', '2014-12-09 16:21:47', 'Actualizacion de Datos', '8', 'mixto', ''),
-(259, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '127.0.0.1', '1', '2014-12-09 16:21:50', 'SALIDA', '', '', ''),
-(260, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:21:53', 'INGRESO', '', '', ''),
-(261, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:31:58', 'SALIDA', '', '', ''),
-(262, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:32:00', 'INGRESO', '', '', ''),
-(263, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', 'TRUE', '2014-12-09 16:32:57', 'Nuevo Docente y Cuenta', '', 'multiple', ''),
-(264, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:33:32', 'SALIDA', '', '', ''),
-(265, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '127.0.0.1', '1', '2014-12-09 16:33:33', 'INGRESO', '', '', '');
+(1, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 18:11:49', 'SALIDA', '', '', ''),
+(2, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-08 18:11:51', 'INGRESO', '', '', ''),
+(3, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', 'TRUE', '2014-12-08 18:12:06', 'CAMBIO DE SECCION', '8', '9', ''),
+(4, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-08 18:12:45', 'SALIDA', '', '', ''),
+(5, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 18:12:52', 'INGRESO', '', '', ''),
+(6, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', 'TRUE', '2014-12-08 18:14:51', 'Reg. de Nuevo Docente', '', 'multiple', ''),
+(7, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 18:37:33', 'SALIDA', '', '', ''),
+(8, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 18:37:41', 'INGRESO', '', '', ''),
+(9, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', 'TRUE', '2014-12-08 18:43:50', 'Reg. Nueva Secci&oacute;n', 'F', '6to - F', ''),
+(10, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 18:44:06', 'SALIDA', '', '', ''),
+(11, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 18:44:17', 'INGRESO', '', '', ''),
+(12, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', 'TRUE', '2014-12-08 18:45:33', 'Reg. Reprecentante', '10', 'multiple', ''),
+(13, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', 'TRUE', '2014-12-08 18:45:33', 'Reg. Alumno', '10', 'multiple', ''),
+(14, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', 'TRUE', '2014-12-08 18:47:23', 'Reg. Reprecentante', '11', 'multiple', ''),
+(15, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', 'TRUE', '2014-12-08 18:47:23', 'Reg. Alumno', '11', 'multiple', ''),
+(16, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', 'TRUE', '2014-12-08 18:48:10', 'Actualizacion de Datos', '10', 'mixto', ''),
+(17, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 18:48:21', 'SALIDA', '', '', ''),
+(18, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 18:48:37', 'INGRESO', '', '', ''),
+(19, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 19:00:04', 'SALIDA', '', '', ''),
+(20, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-08 19:01:34', 'INGRESO', '', '', ''),
+(21, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', 'TRUE', '2014-12-08 19:02:28', 'CAMBIO DE SECCION', '2', '9', ''),
+(22, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', 'TRUE', '2014-12-08 19:02:37', 'CAMBIO DE SECCION', '1', '9', ''),
+(23, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', 'TRUE', '2014-12-08 19:04:00', 'Actualizacion de Datos', '7', 'mixto', ''),
+(24, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-08 19:09:39', 'SALIDA', '', '', ''),
+(25, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 19:09:50', 'INGRESO', '', '', ''),
+(26, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 19:23:57', 'SALIDA', '', '', ''),
+(27, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 19:24:09', 'INGRESO', '', '', ''),
+(28, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 19:24:21', 'SALIDA', '', '', ''),
+(29, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-08 19:24:23', 'INGRESO', '', '', ''),
+(30, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', 'TRUE', '2014-12-08 20:17:39', 'Reg. Reprecentante', '12', 'multiple', ''),
+(31, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', 'TRUE', '2014-12-08 20:17:39', 'Reg. Alumno', '12', 'multiple', ''),
+(32, 'jaivelis', 'fde9e63dbb42cf0890b9f666b71d72bc', '192.168.1.106', '1', '2014-12-08 20:19:32', 'SALIDA', '', '', ''),
+(33, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 20:19:40', 'INGRESO', '', '', ''),
+(34, '', '', '192.168.1.106', 'TRUE', '2014-12-08 20:22:04', 'Reg. Reprecentante', '13', 'multiple', ''),
+(35, '', '', '192.168.1.106', 'TRUE', '2014-12-08 20:22:04', 'Reg. Alumno', '13', 'multiple', ''),
+(36, '', '', '192.168.1.106', '1', '2014-12-08 20:22:04', 'SALIDA', '', '', ''),
+(37, '', '', '192.168.1.106', '1', '2014-12-08 20:22:09', 'SALIDA', '', '', ''),
+(38, '', '', '192.168.1.106', '1', '2014-12-08 20:22:11', 'SALIDA', '', '', ''),
+(39, '', '', '192.168.1.106', '1', '2014-12-08 20:24:23', 'SALIDA', '', '', ''),
+(40, '', '', '192.168.1.106', '0', '2014-12-08 20:24:31', 'INGRESO', '', '', ''),
+(41, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 20:24:38', 'INGRESO', '', '', ''),
+(42, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', 'TRUE', '2014-12-08 20:26:47', 'Reg. Reprecentante', '14', 'multiple', ''),
+(43, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', 'TRUE', '2014-12-08 20:26:47', 'Reg. Alumno', '14', 'multiple', ''),
+(44, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 20:28:09', 'SALIDA', '', '', ''),
+(45, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 20:28:21', 'INGRESO', '', '', ''),
+(46, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 20:44:48', 'SALIDA', '', '', ''),
+(47, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 20:45:01', 'INGRESO', '', '', ''),
+(48, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 20:46:19', 'SALIDA', '', '', ''),
+(49, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 20:53:28', 'INGRESO', '', '', ''),
+(50, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', 'TRUE', '2014-12-08 20:58:44', 'Reg. Nueva Secci&oacute;n', 'G', '5to - G', ''),
+(51, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 21:11:13', 'SALIDA', '', '', ''),
+(52, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 21:11:16', 'INGRESO', '', '', ''),
+(53, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 21:12:24', 'SALIDA', '', '', ''),
+(54, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 21:12:27', 'INGRESO', '', '', ''),
+(55, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 21:12:32', 'SALIDA', '', '', ''),
+(56, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 21:12:34', 'INGRESO', '', '', ''),
+(57, 'admin', '31adb5784cd04b2ce8b45c1661b511ad', '192.168.1.106', '1', '2014-12-08 21:12:37', 'SALIDA', '', '', ''),
+(58, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 21:12:39', 'INGRESO', '', '', ''),
+(59, 'kelvin', '569417cce1278574c58c6a4a0cd071e6', '192.168.1.106', '1', '2014-12-08 21:13:12', 'SALIDA', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -288,7 +168,7 @@ INSERT INTO `auditoria` (`id`, `usuario`, `password`, `ip`, `valido`, `fecha`, `
 
 DROP TABLE IF EXISTS `avance_integral`;
 CREATE TABLE IF NOT EXISTS `avance_integral` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `id_alumno` int(10) NOT NULL,
   `enlace_docente` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `cognitiva` text COLLATE utf8_spanish_ci NOT NULL,
@@ -299,8 +179,9 @@ CREATE TABLE IF NOT EXISTS `avance_integral` (
   `sexual` text COLLATE utf8_spanish_ci NOT NULL,
   `fisica` text COLLATE utf8_spanish_ci NOT NULL,
   `moral` text COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `fecha` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
 
 --
 -- Truncar tablas antes de insertar `avance_integral`
@@ -326,13 +207,14 @@ INSERT INTO `avance_integral` (`id`, `id_alumno`, `enlace_docente`, `cognitiva`,
 
 DROP TABLE IF EXISTS `docentes`;
 CREATE TABLE IF NOT EXISTS `docentes` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `id_enlace` varchar(20) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_enlace` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
 
 --
 -- Truncar tablas antes de insertar `docentes`
@@ -349,7 +231,7 @@ INSERT INTO `docentes` (`id`, `nombre`, `apellido`, `telefono`, `correo`, `id_en
 (4, 'Paul Hernesto', 'Figueroa Romero', '0424-14512355', 'PaulH@gmail.com', 'cae8'),
 (6, 'Maria', 'Rodriguez', '0243-2715020', '', 'e50d'),
 (7, 'Jaivelis', 'Villegas', '0426-3215454', 'jaivelis@vi.es', '3630'),
-(8, 'juan', 'perez', '', '', '4360');
+(9, 'kelvin', 'xxxx', '1111111', 'no@tiene.com', '4c26');
 
 -- --------------------------------------------------------
 
@@ -359,15 +241,17 @@ INSERT INTO `docentes` (`id`, `nombre`, `apellido`, `telefono`, `correo`, `id_en
 
 DROP TABLE IF EXISTS `representanes`;
 CREATE TABLE IF NOT EXISTS `representanes` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `cedula` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `telefono` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `direccion` text COLLATE utf8_spanish_ci NOT NULL,
-  `edad` int(5) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `edad` int(5) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cedula` (`cedula`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
 
 --
 -- Truncar tablas antes de insertar `representanes`
@@ -379,13 +263,18 @@ TRUNCATE TABLE `representanes`;
 --
 
 INSERT INTO `representanes` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`, `correo`, `direccion`, `edad`) VALUES
-(2, 'RAMON', 'HERNANDEZ', 'V-19.000.000', '0414-14512355', 'R@gmail.com', 'calle', 25),
+(2, 'RAMONS', 'HERNANDEZ', 'V-19.000.000', '0414-14512355', 'R@gmail.com', 'calle', 25),
 (3, 'arturo', 'gomez', 'V-14.000.001', '0414-4144144', '', '', 32),
 (5, 'Estevan', 'Orocopei', 'V-123441', '', '', '', 48),
 (6, 'Pedro', 'Martinez', 'V-4651752', '', '', '', 0),
 (7, 'lunes', 'lunes', 'V-100', '0426-2626261', 'Lunes@semana.com', 'calle la semana cruce con los meces,\nurbanización los años', 50),
-(8, 'Cipriano', 'Castro', 'V-1.548', '0416-1234567', 'cuba@habana.com', 'la Isla de Cuba', 70),
-(9, 'Aristobulo', 'Isturiz', 'V-41741471', '0412-1212121', '', '', 60);
+(8, 'Cipriano', 'Castros', 'V-1.548', '0416-1234567', 'cuba@habana.com', 'la Isla de Cuba', 70),
+(9, 'Aristobulo', 'Isturiz', 'V-41741471', '0412-1212121', '', '', 60),
+(10, 'jueves', 'Semana', 'V-1.000.000', '', '', '', 49),
+(11, 'Viernes', 'Decembrinoo', 'V-2000000', '', '', '', 40),
+(12, 'Ruben', 'Blades', 'V-12341231', '', 'ruben@hotmail.com', 'calle los chaguaramos nro 40 los cocos maracay esatado aragua', 35),
+(13, 'Jose', 'Ceballos', 'V-4657891', '', '', 'Edificio los mangos piso 4 apartamento 17', 32),
+(14, 'Jose', 'Ceballos', 'V-14465397', '0243-321414', '', '', 52);
 
 -- --------------------------------------------------------
 
@@ -395,14 +284,15 @@ INSERT INTO `representanes` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`,
 
 DROP TABLE IF EXISTS `secciones`;
 CREATE TABLE IF NOT EXISTS `secciones` (
-`id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `grado` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `seccion` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
   `year` varchar(7) COLLATE utf8_spanish_ci NOT NULL,
   `cap_alumnos` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `turno` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `id_docente` varchar(10) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_docente` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
 
 --
 -- Truncar tablas antes de insertar `secciones`
@@ -421,7 +311,9 @@ INSERT INTO `secciones` (`id`, `grado`, `seccion`, `year`, `cap_alumnos`, `turno
 (13, '2do', 'B', '', '20', 'M', '33e1'),
 (12, '3RO', 'A', '', '10', 'M', 'cae8'),
 (14, '4to', 'A', '', '10', 'T', '3630'),
-(15, '3RO', 'B', '', '10', 'M', 'cae8');
+(15, '3RO', 'B', '', '10', 'M', 'cae8'),
+(16, '6to', 'F', '', '30', 'M', '4c26'),
+(17, '5to', 'G', '', '30', 'T', '4c26');
 
 -- --------------------------------------------------------
 
@@ -431,7 +323,7 @@ INSERT INTO `secciones` (`id`, `grado`, `seccion`, `year`, `cap_alumnos`, `turno
 
 DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `clave` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -439,8 +331,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `tipo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `secciones` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
   `turno` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
-  `id_enlace` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `id_enlace` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `usuario` (`usuario`),
+  UNIQUE KEY `id_enlace` (`id_enlace`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
 
 --
 -- Truncar tablas antes de insertar `usuarios`
@@ -464,93 +359,9 @@ INSERT INTO `usuarios` (`id`, `usuario`, `clave`, `nombre`, `apellido`, `tipo`, 
 (10, 'paul', 'cae8f2d6c83b6e03bdd0bd5b3ad66a40', 'Paul Hernesto', 'Figueroa Romero', 'D', '', '', 'cae8'),
 (11, 'mariar', 'e50d9e9230021698fa7a4d82e1b86094', 'Maria', 'Rodriguez', 'D', '', '', 'e50d'),
 (12, 'jaivelis', '3630147a213aba59fbfc30119373898b', 'Jaivelis', 'Villegas', 'D', '', '', '3630'),
-(13, 'juanp', '4360ee92f6cfb6581697788bdcfb6756', 'juan', 'perez', 'D', '', '', '4360');
+(13, 'juanp', '4360ee92f6cfb6581697788bdcfb6756', 'juan', 'perez', 'D', '', '', '4360'),
+(14, 'kelvin', '4c26c1128da7ca8b80983f38dc068681', 'kelvin', 'xxxx', 'D', '', '', '4c26');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `auditoria`
---
-ALTER TABLE `auditoria`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `avance_integral`
---
-ALTER TABLE `avance_integral`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `docentes`
---
-ALTER TABLE `docentes`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `representanes`
---
-ALTER TABLE `representanes`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `cedula` (`cedula`);
-
---
--- Indices de la tabla `secciones`
---
-ALTER TABLE `secciones`
- ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `usuario` (`usuario`), ADD UNIQUE KEY `id_enlace` (`id_enlace`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT de la tabla `auditoria`
---
-ALTER TABLE `auditoria`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=266;
---
--- AUTO_INCREMENT de la tabla `avance_integral`
---
-ALTER TABLE `avance_integral`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT de la tabla `docentes`
---
-ALTER TABLE `docentes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT de la tabla `representanes`
---
-ALTER TABLE `representanes`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT de la tabla `secciones`
---
-ALTER TABLE `secciones`
-MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
