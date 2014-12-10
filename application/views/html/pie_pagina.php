@@ -223,9 +223,12 @@
 
 
 
+<script  type="text/javascript">
 
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+});
 
-<script>
 $('#btnCrearCuenta').click(function(e){
 	e.preventDefault();
 	$('#form_reg_docente').modal();
@@ -239,6 +242,26 @@ $('#reg_docente').click(function(e){
 $('#reg_seccion').click(function(e){
 	e.preventDefault();
 	$('#form_reg_seccion').modal();
+});
+
+$('#alergico').change(function(){
+	if($("#alergico").val()=='N'){
+		$('#descripcion_alergia').attr('disabled','disabled');
+	}else{
+		$('#descripcion_alergia').removeAttr('disabled');
+	}
+
+});
+
+ $(function() {
+$( "#fnacimiento" ).datepicker();
+});
+
+$("#btn_reg_docente").click(function(){
+	if($("#clave").val()!=$("#clave2").val()){
+		alert("Las clave no Coincide porfavor corrija");
+		event.preventDefault();
+	}
 });
 </script>
 </body>

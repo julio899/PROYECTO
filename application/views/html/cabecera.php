@@ -14,6 +14,11 @@ $usuario=$this->session->userdata('datos_usuarios');
 	<script src="<?php echo base_url()."js/jquery-1.11.1.min.js";?>"></script>
 	<script src="<?php echo base_url()."js/bootstrap.js";?>"></script>
 	<script src="<?php echo base_url()."js/jquery.slides.min.js";?>"></script>
+
+	<!-- datepicker -->
+	<script src="<?php echo base_url()."js/jquery-ui.js";?>"></script>
+	<link rel="stylesheet" href="<?php echo base_url()."css/jquery-ui.css";?>">
+	
 <style>
 div.espacio{
 	height: 10em;

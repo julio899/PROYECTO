@@ -174,7 +174,7 @@ if($this->session->flashdata('error')): ?>
 										  <div class="form-group">
 										    <label for="fnacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
 										    <div class="col-sm-10">
-										      <input type="date" name="fnacimiento" class="form-control" id="fnacimiento">
+										      <input type="text" name="fnacimiento" class="form-control" id="fnacimiento">
 										    </div>
 										  </div>
 
@@ -622,11 +622,6 @@ echo $modal_cambio_seccion;
 
 					
 
-		    <script type="text/javascript">
-		    	$(function () {
-  					$('[data-toggle="tooltip"]').tooltip()
-				});
-		    </script>
 	</div>
 	<!--  FIN de IF si selecciona Una seccion especifica	-->
 <?php endif;?>

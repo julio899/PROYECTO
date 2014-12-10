@@ -182,7 +182,7 @@
 										  <div class="form-group">
 										    <label for="fnacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
 										    <div class="col-sm-10">
-										      <input type="date" name="fnacimiento" class="form-control" id="fnacimiento">
+										      <input type="text" name="fnacimiento" class="form-control" id="fnacimiento">
 										    </div>
 										  </div>
 										  
@@ -301,12 +301,13 @@
                             <td>".$datos[$i]['correo']."</td>
                             <td>".$datos[$i]['telefono']."</td>
                             <td>
-                            	<a href=\"".base_url().index_page()."/administrador/modificar_docente/".$datos[$i]['id']."\"><button type=\"button\" class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button></a>
-                            	<a href=\"".base_url().index_page()."/administrador/eliminar_docente/".$datos[$i]['id']."\"><button type=\"button\" class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-remove\"></span></button></a>
+                            	<a href=\"".base_url().index_page()."/administrador/modificar_docente/".$datos[$i]['id']."\"><button type=\"button\" class=\"btn btn-warning btn-sm\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Actualizar Datos\" data-original-title=\"Actualizar Datos\"><span class=\"glyphicon glyphicon-edit\"></span></button></a>
+                            	<a href=\"".base_url().index_page()."/administrador/eliminar_docente/".$datos[$i]['id']."\"><button type=\"button\" id=\"btn-eliminar-docente\" class=\"btn btn-danger btn-sm\"  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar Docente\" data-original-title=\"Eliminar Docente\"><span class=\"glyphicon glyphicon-remove\"></span></button></a>
                             </td>
                           </tr>";
                             }
                           ?>
+
                         </tbody>
       </table>
 	</div>
