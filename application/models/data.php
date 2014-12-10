@@ -4,6 +4,7 @@ class Data extends CI_Model {
 var $temporal;
 var $temporal2;
 var $temporal3;
+var $temporal4;
 var $datos;
 var $bandera=null;
 
@@ -153,11 +154,11 @@ var $bandera=null;
 
 	function traer_alumnos_inscritos($id_seccion=""){
 		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id_seccion` =$id_seccion");
-		$this->temporal=null;
+		$this->temporal4=null;
 			//recorro los datos y los ingreso en un array
 				foreach ($query->result() as $row) {
 					$representante=$this->traer_nombre_representante_id($row->id_representante);
-					$this->temporal[]=array(
+					$this->temporal4[]=array(
 												'id'=>$row->id,
 												'nombres'=>$row->nombres,
 												'apellidos'=>$row->apellidos,
@@ -174,7 +175,7 @@ var $bandera=null;
 												);
 				}//fin del foreach
 
-		return $this->temporal;
+		return $this->temporal4;
 	}
 
 	function traer_nombre_docente($enlace=""){
@@ -220,6 +221,32 @@ var $bandera=null;
 		}
 		return $this->temporal;
 	}//fin de traer_alumno
+
+
+	function traer_alumno_id_representante($id=""){
+		$query=$this->db->query("SELECT * FROM `alumnos` WHERE `id_representante` = '$id'");
+		$this->temporal=null;
+		foreach ($query->result() as $row) {
+			$seccion_grado=$this->traer_seccion_grado($row->id_seccion);
+			$this->temporal = array(
+								'id' => $row->id,
+								'nombres' => $row->nombres,
+								'apellidos' => $row->apellidos,
+								'cedula' => $row->cedula,
+								'edad' => $row->edad,
+								'seccion' => $seccion_grado['seccion'],
+								'grado' => $seccion_grado['grado'],
+								'alergico' =>$row->alergico ,
+								'descripcion_alergia' =>$row->descripcion_alergia ,
+								'peso' =>$row->peso ,
+								'altura' =>$row->altura ,
+								'ult_visita_psicologo' =>$row->ult_visita_psicologo ,
+								'id_seccion' =>$row->id_seccion ,
+								'id_representante' =>$row->id_representante 
+								);
+		}
+		return $this->temporal;
+	}//fin de traer_alumno por id representante
 
 	function traer_avances_alumno($id_alumno=""){
 		$query=$this->db->query("SELECT * FROM  `avance_integral` WHERE  `id_alumno` =$id_alumno ORDER BY  `fecha` DESC");
@@ -407,6 +434,26 @@ var $bandera=null;
 
 	}
 
+	function toda_auditoria(){
+		$query=$this->db->query("SELECT * FROM `auditoria` ORDER BY `auditoria`.`fecha` DESC");
+		$this->temporal2=null;
+		foreach ($query->result() as $row) {
+			$this->temporal2[]=array(
+										'id'=>$row->id,
+										'usuario'=>$row->usuario,
+										'ip'=>$row->ip,
+										'valido'=>$row->valido,
+										'fecha'=>$row->fecha,
+										'tipo'=>$this->traer_tipo_usuario($row->usuario),
+										'accion'=>$row->accion,
+										'afectado'=>$row->afectado
+
+										);
+		}
+		return $this->temporal2;
+
+	}
+
 	function representantes(){
 		//$query=$this->db->query("SELECT `representanes`.`nombres`,`representanes`.`apellidos`,`representanes`.`cedula`,`representanes`.`telefono`,`representanes`.`correo`,`representanes`.`direccion`,`alumnos`.`id` FROM `representanes`,`alumnos` WHERE `representanes`.`id`=`alumnos`.`id_representante`");
 		$query=$this->db->query("SELECT * FROM `representanes`");
@@ -450,7 +497,33 @@ var $bandera=null;
 		return $this->temporal;
 	}
 
+	function todas_secciones(){
+		$query=$this->db->query("SELECT * FROM `secciones` ORDER BY `secciones`.`grado` ASC");
+		$this->temporal=null;
+		foreach ($query->result() as $row) {
+			$this->temporal[]=array(
+									'id'=>$row->id,
+									'grado'=>$row->grado,
+									'seccion'=>$row->seccion,
+									'cap_alumnos'=>$row->cap_alumnos,
+									'turno'=>$row->turno,
+									'docente'=>$this->nombre_docente_por_enlace($row->id_docente),
+									'enlace_docente'=>$row->id_docente,
+									'alumnos_inscritos'=>$this->traer_alumnos_inscritos($row->id)
+									);
+		}//fin del foreach
 
+		return $this->temporal;
+	}//fin de todas_secciones
+
+	function nombre_docente_por_enlace($enlace=""){
+		$query2=$this->db->query("SELECT * FROM `docentes` WHERE `id_enlace` LIKE '$enlace'");
+		$this->temporal2=null;
+		foreach ($query2->result() as $row) {
+			$this->temporal2=strtoupper($row->nombre." ".$row->apellido);
+		}//fin del foreach
+		return $this->temporal2;
+	}
 
 	function cambiar_seccion_alumno($datos=""){
 		if($this->db->query("UPDATE `alumnos` SET `id_seccion`= ".$datos['seccion']." WHERE `alumnos`.`id` = ".$datos['id_alumno']."") ){

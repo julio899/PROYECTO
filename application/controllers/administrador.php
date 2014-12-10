@@ -109,8 +109,13 @@ class Administrador extends CI_Controller {
 	function agenda_representantes(){
 		$this->load->model('data');
 		$representantes=$this->data->representantes();
-		$this->session->set_flashdata('agenda_representantes',$representantes);
-		redirect('administrador','refreh');
+		//$this->session->set_flashdata('agenda_representantes',$representantes);
+		//redirect('administrador','refreh');
+
+
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_administrador',array('agenda_representantes'=> $representantes));
+		$this->load->view('html/pie_pagina');
 	}
 
 	function modificar_docente($id=""){
@@ -150,10 +155,79 @@ class Administrador extends CI_Controller {
 		}
 		redirect('administrador','refreh');
 	}
+	function reportes(){
+		$this->load->view('html/cabecera');
+		$this->load->view('contenido_administrador',array('reportes'=>TRUE) );
+		$this->load->view('html/pie_pagina');
+	}
 
-	function pruebas($id=""){
+	function reporte_general(){
 			$this->load->model('data');
-			var_dump($this->data->traer_tipo_usuario($id));
+			$datos=$this->data->todas_secciones();
+			$this->load->view('reporte_secciones',array('datos'=>$datos));
+	}
+
+	function reporte_historial(){
+		$this->load->model('data');
+		$historial=$this->data->toda_auditoria();
+		echo "<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=\"utf-8\">
+	<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+	<title>Reporte COMPLETO</title>
+	<!-- <link rel=\"stylesheet\" href=\"\"> --> 
+
+
+	<!-- Archivos JS -->
+	<script src=\"../../js/jquery-1.11.1.min.js\"></script>
+<style>
+	pre#impresion{
+	margin-left: 70px;
+	margin-right: 70px;
+	}	
+	table>tbody>tr>td{
+	padding:10px;
+	}
+	h1{
+	font-size: 1.5em;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	}
+	div.cuerpo{
+		margin-left: 25px;
+	}
+	div.contenido{
+		margin-left: 50px;
+		margin-top: 50px;
+	}
+
+</style>
+
+
+</head>
+<body>";
+echo '<a class="imprimir" href="#"><button>Imprimir</button></a><h1> <<  HISTORICO DE AUDITORIA DETALLADO >>  </h1>';
+		echo "<pre id=\"impresion\">";
+			for($i=0;$i<count($historial);$i++){
+				$nombreA=null;
+				$representante=null;
+				if($historial[$i]['accion']=='CAMBIO DE SECCION'){$nombreA=$this->data->traer_alumno($historial[$i]['afectado'])['nombres']." seccion[".$this->data->traer_alumno_id_representante($historial[$i]['afectado'])['seccion']."]";}
+				if($historial[$i]['accion']=='Reg. Alumno'){$nombreA=$this->data->traer_alumno_id_representante($historial[$i]['afectado'])['nombres']." seccion[".$this->data->traer_alumno_id_representante($historial[$i]['afectado'])['seccion']."]";}
+				if($historial[$i]['accion']=='Reg. Reprecentante'){$nombreA=$this->data->traer_nombre_representante_id($historial[$i]['afectado']);}
+				if (isset($nombreA['seccion'])){
+					echo "# ".($historial[$i]['id'])." USUARIO: ".$historial[$i]['usuario']." EQUIPO: ".$historial[$i]['ip']." FECHA: ".$historial[$i]['fecha']." TIPO: ".$historial[$i]['tipo']." Accion: ".$historial[$i]['accion']." Afectado: ".$historial[$i]['afectado']." (".$nombreA." seccion [".$nombreA['seccion']."] ) \n";
+			
+				}else {
+					echo "# ".($historial[$i]['id'])." USUARIO: ".$historial[$i]['usuario']." EQUIPO: ".$historial[$i]['ip']." FECHA: ".$historial[$i]['fecha']." TIPO: ".$historial[$i]['tipo']." Accion: ".$historial[$i]['accion']." Afectado: ".$historial[$i]['afectado']." (".$nombreA." ) \n";
+			
+				}
+				
+			}//fin del for
+		
+		echo "</pre>";
+		echo '<script>	$(".imprimir").click(function(){    window.print();    return false;});</script></body></html>';
 	}
 
 }//fin de la clase Administrador

@@ -241,7 +241,7 @@ if($datos_session['tipo']=='A'):
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<?php echo base_url().index_page().'/administrador'; ?>" class="texto-menu">Inicio</a></li>
-					<li><a href="#" class="texto-menu">Reportes</a></li>
+					<li><a href="<?php echo base_url().index_page().'/administrador/reportes';?>" class="texto-menu">Reportes</a></li>
 					<li><a href="<?php echo base_url().index_page().'/administrador/historial'; ?>" class="texto-menu">Historial</a></li>
 					<li><a href="<?php echo base_url().index_page().'/administrador/soporte'; ?>" class="texto-menu">Soporte</a></li>
 				</ul>

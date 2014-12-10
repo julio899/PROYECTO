@@ -60,7 +60,8 @@
 					<li><a href="<?php echo base_url().index_page().'/administrador/registro_alumno'; ?>">Registro de Alumno</a></li>
 					<li><a href="" id="reg_seccion">Creacion de secciones</a></li>
 					<li><a href="<?php echo base_url().index_page().'/administrador/agenda_docentes'; ?>">Agenda de Docentes</a></li>
-					<li><a href="<?php echo base_url().index_page().'/administrador/agenda_representantes'; ?>">Agenda de Representantes</a></li>
+					 <li><a href="<?php echo base_url().index_page().'/administrador/agenda_representantes'; ?>">Agenda de Representantes</a></li>
+					<!-- -->
 					<li><button class="btn btn-info form-control" type="button">
 					  Mensajes <span class="badge">4</span>
 					</button></li>
@@ -315,6 +316,15 @@
 <!-- Fin de la tabla Agenda Docentes-->
 <?php endif;?>
 
+<?php if(isset($reportes)):?>
+<!--REPORTES -->
+	<div class="col-md-9">
+		<a href="<?php echo base_url().index_page().'/administrador/reporte_general';?>" class="btn btn-primary" target="_blank"> REPORTE GENERAL SECCIONES - DOCENTES - ALUMNOS </a>
+		<a href="<?php echo base_url().index_page().'/administrador/reporte_historial';?>" class="btn btn-default" target="_blank"> REPORTE HISTORIAL DE AUDITORIA DETALLADO </a>
+	</div>
+<!-- FIN de REPORTE-->
+<?php endif;?>
+
 
 <?php if($this->session->flashdata('modificar_docente')):?>
 	<!-- Inicio de panel de Modificacion de datos del Docente-->
@@ -383,10 +393,11 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 
 
 
-<?php if($this->session->flashdata('agenda_representantes')):?>
+<?php if(isset($agenda_representantes) ):?>
 <!-- Inicio de la tabla agenda_representantes-->
 
 	<div class="col-md-9 docs">
+	<?php //var_dump($agenda_representantes);?>
 			<table class="table table-striped">
                         <thead>
                           <tr>
@@ -398,7 +409,7 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
                         </thead>
                         <tbody>
                           <?php 
-                          $datos=$this->session->flashdata('agenda_representantes');
+                          $datos=$agenda_representantes;
                             for($i=0;$i< count($datos);$i++){
                               echo "
                           <tr>
@@ -422,7 +433,7 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 
 
 
-<?php if(!$this->session->flashdata('confirmar_eliminar_docente') && !$this->session->flashdata('modificar_docente') && !$this->session->flashdata('registroAlumno') && !$this->session->flashdata('historial') && !$this->session->flashdata('agenda_docentes') && !$this->session->flashdata('agenda_representantes')):?>
+<?php if(!isset($agenda_representantes) && !isset($reportes)&&!$this->session->flashdata('confirmar_eliminar_docente') && !$this->session->flashdata('modificar_docente') && !$this->session->flashdata('registroAlumno') && !$this->session->flashdata('historial') && !$this->session->flashdata('agenda_docentes') && !$this->session->flashdata('agenda_representantes')):?>
 <!-- Inicio del Contenido EN CASO QUE NO HAYA QUE REGISTRAR ALUMNO-->
 
 	<div class="col-md-9 docs">
