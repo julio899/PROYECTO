@@ -61,10 +61,11 @@
 					<li><a href="" id="reg_seccion">Creacion de secciones</a></li>
 					<li><a href="<?php echo base_url().index_page().'/administrador/agenda_docentes'; ?>">Agenda de Docentes</a></li>
 					 <li><a href="<?php echo base_url().index_page().'/administrador/agenda_representantes'; ?>">Agenda de Representantes</a></li>
-					<!-- -->
+					<!-- 
 					<li><button class="btn btn-info form-control" type="button">
 					  Mensajes <span class="badge">4</span>
-					</button></li>
+					</button></li> 
+					-->
 				</ul>
 
 				<div class="baner forml-control">
@@ -440,24 +441,18 @@ $docente_eliminar=$this->session->flashdata('confirmar_eliminar_docente');
 
 
 				<h1 id="getting-started">Bienvenido <strong><?php $usu=$this->session->userdata('datos_usuarios'); echo $usu['usuario'];?></strong> al panel del Administrador</h1>
-					<p>Texto de introduccion algo que pueda ser  <code>&lt;Relevante&gt;</code> en esta seccion.</p>
+						<div class="bs-callout bs-callout-info">
+							<h4>INFORMACI&Oacute;N ILUSTRATIVA</h4>
+						</div>
+						<p class="informacion">
+							La política educativa en Venezuela está orientada hacia el mejoramiento de la calidad, incremento de la cobertura y modernización de la estructura administrativa del sistema educativo, a través de la revisión y reforma de todos sus niveles y modalidades, razón, por la cual se le ha dado énfasis al proceso de descentralización, como una estrategia orientada a dar mayor autonomía de gestión a los centros educativos; y por otra parte, generar cambios profundos en la profesión docente para la transformación de las prácticas pedagógicas.La educación especial, identifica, evalúa y crea programas especiales para niños cuyas dificultades o desventajas para aprender requieren ayuda adicional para alcanzar su pleno desarrollo educativo. Tales dificultades pueden ir desde disfunciones físicas, problemas de visión, audición o lenguaje, disfunción para aprender (desventaja mental), dificultades emocionales o de conducta, o un problema médico o de salud. Otros niños pueden tener dificultades más generales con la lectura, escritura, lenguaje o matemáticas, por lo que requerirán una ayuda extra. Las ayudas para atender las necesidades especiales de educación pueden darse en escuelas integradas o en escuelas especiales.
+						</p>
+						<br>
+						<p class="informacion">
+							Se cree que alrededor del 20% de los niños necesitan algún tipo de educación especializada a lo largo de su escolarización. La gran mayoría de ellos tienen problemas que se resolverán dentro de las escuelas ordinarias; sólo una pequeña minoría de las ayudas educativas especializadas pueden requerir, por su mayor exigencia y complejidad, la existencia de medios, centros y un conjunto de servicios que permitan asegurar que la evaluación se ajuste a las necesidades de esos niños.
+						</p><hr>
 				
-						En este Proyecto fue desarrollado en PHP y se usaron herramientas OpenSource.<br>
-						Tales como
-						<ol class="breadcrumb">
-							<li>Twitter Bootstarp</li>
-							<li>JQuery</li>
-							<li>MySQL</li>
-						</ol>
-				<p></p>
-
-				<div class="note note-danger">Muestra de contnido.<br></div>
 				<br><p></p>
-				<p>Luego agregaremos y crearemos contnido dinamico.</p>
-				<h4>Datos de la session <code>Estamos verificando que todo cargo correctamente</code> </h4>
-					<pre>
-						<?php //var_dump($this->session->userdata);?>
-					</pre>
 					<p class="alert alert-success">Conexiones Funcionando a la Perfeccion. . .</p>
 
 	</div>

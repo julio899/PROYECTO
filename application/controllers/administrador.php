@@ -22,18 +22,22 @@ class Administrador extends CI_Controller {
 			$this->load->model('data');
 			$this->data->reg_auditoria_salida();
 			$this->session->sess_destroy();
-			redirect('','refreh');
+			$this->session->set_userdata('error','ERROR DEBE IDENTIFICARSE');
+			redirect('');
 	}//fin de cerrar_session
 
 	function validacionAdministrador(){
-		if($this->datos_usuario['tipo']!='A'){
+		$this->datos_temporal=$this->session->userdata('datos_usuarios');
+		//var_dump($this->datos_temporal);
+		
+		if($this->datos_temporal['tipo']!='A'){
 			$this->cerrar_session();
-			exit();
+			//exit();
 		}
 	}
 
 	function registrarDocente(){
-
+		$this->validacionAdministrador();
 		$this->datos_temporal=$this->input->post();
 		$this->load->model('data');
 		if($this->datos_temporal['clave']==$this->datos_temporal['reclave']){
@@ -46,6 +50,7 @@ class Administrador extends CI_Controller {
 	} // fin de la fin de la funcion registrarDocente
 	
 	function registroSeccion(){
+		$this->validacionAdministrador();
 		$this->load->model('data');
 		if($this->data->crear_seccion($this->input->post())){
 
@@ -88,6 +93,7 @@ class Administrador extends CI_Controller {
 	}//fin de procesar_registro_alumno
 
 	function historial(){
+		$this->validacionAdministrador();
 		$this->load->model('data');
 		$this->datos_temporal=$this->data->ultimos_ingresos();
 		$this->load->view('html/cabecera');
@@ -96,6 +102,7 @@ class Administrador extends CI_Controller {
 	}
 
 	function soporte(){
+		$this->validacionAdministrador();
 		$this->load->view('html/cabecera');
 		$this->load->view('soporte');
 		$this->load->view('html/pie_pagina');
@@ -107,6 +114,7 @@ class Administrador extends CI_Controller {
 	}
 
 	function agenda_representantes(){
+		$this->validacionAdministrador();
 		$this->load->model('data');
 		$representantes=$this->data->representantes();
 		//$this->session->set_flashdata('agenda_representantes',$representantes);
@@ -156,18 +164,22 @@ class Administrador extends CI_Controller {
 		redirect('administrador','refreh');
 	}
 	function reportes(){
+
+		$this->validacionAdministrador();
 		$this->load->view('html/cabecera');
 		$this->load->view('contenido_administrador',array('reportes'=>TRUE) );
 		$this->load->view('html/pie_pagina');
 	}
 
 	function reporte_general(){
+		$this->validacionAdministrador();
 			$this->load->model('data');
 			$datos=$this->data->todas_secciones();
 			$this->load->view('reporte_secciones',array('datos'=>$datos));
 	}
 
 	function reporte_historial(){
+		$this->validacionAdministrador();
 		$this->load->model('data');
 		$historial=$this->data->toda_auditoria();
 		echo "<!DOCTYPE html>
@@ -213,14 +225,30 @@ echo '<a class="imprimir" href="#"><button>Imprimir</button></a><h1> <<  HISTORI
 			for($i=0;$i<count($historial);$i++){
 				$nombreA=null;
 				$representante=null;
-				if($historial[$i]['accion']=='CAMBIO DE SECCION'){$nombreA=$this->data->traer_alumno($historial[$i]['afectado'])['nombres']." seccion[".$this->data->traer_alumno_id_representante($historial[$i]['afectado'])['seccion']."]";}
-				if($historial[$i]['accion']=='Reg. Alumno'){$nombreA=$this->data->traer_alumno_id_representante($historial[$i]['afectado'])['nombres']." seccion[".$this->data->traer_alumno_id_representante($historial[$i]['afectado'])['seccion']."]";}
-				if($historial[$i]['accion']=='Reg. Reprecentante'){$nombreA=$this->data->traer_nombre_representante_id($historial[$i]['afectado']);}
+				$datos=null; $datosA=null;
+				if($historial[$i]['accion']=='CAMBIO DE SECCION'){
+					$datos=$this->data->traer_alumno($historial[$i]['afectado']);
+					$datosA=$this->data->traer_alumno_id_representante($historial[$i]['afectado']);
+					$nombreA=$datos['nombres']." seccion[".$datosA['seccion']."]";
+				}
+				
+				if($historial[$i]['accion']=='Reg. Alumno'){
+					$datosA=$this->data->traer_alumno_id_representante($historial[$i]['afectado']);
+					$nombreA=$datosA['nombres']." seccion[".$datosA['seccion']."]";
+				}
+
+				if($historial[$i]['accion']=='Reg. Reprecentante'){
+					$nombreA=$this->data->traer_nombre_representante_id($historial[$i]['afectado']);
+				}
+
 				if (isset($nombreA['seccion'])){
 					echo "# ".($historial[$i]['id'])." USUARIO: ".$historial[$i]['usuario']." EQUIPO: ".$historial[$i]['ip']." FECHA: ".$historial[$i]['fecha']." TIPO: ".$historial[$i]['tipo']." Accion: ".$historial[$i]['accion']." Afectado: ".$historial[$i]['afectado']." (".$nombreA." seccion [".$nombreA['seccion']."] ) \n";
 			
-				}else {
+				}elseif($historial[$i]['afectado']!=''){
 					echo "# ".($historial[$i]['id'])." USUARIO: ".$historial[$i]['usuario']." EQUIPO: ".$historial[$i]['ip']." FECHA: ".$historial[$i]['fecha']." TIPO: ".$historial[$i]['tipo']." Accion: ".$historial[$i]['accion']." Afectado: ".$historial[$i]['afectado']." (".$nombreA." ) \n";
+			
+				}else {
+					echo "# ".($historial[$i]['id'])." USUARIO: ".$historial[$i]['usuario']." EQUIPO: ".$historial[$i]['ip']." FECHA: ".$historial[$i]['fecha']." TIPO: ".$historial[$i]['tipo']." Accion: ".$historial[$i]['accion']."  \n";
 			
 				}
 				

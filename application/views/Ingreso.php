@@ -203,8 +203,7 @@ strong.txt-white{
 
 					<div class="list-group">
 						<a href="#" class="list-group-item active">IDENTIFICACION</a>
-						<?php if( $this->session->flashdata('error') ){echo '<p class="alert alert-danger">'.$this->session->flashdata('error').'</p>';}?>
-					</div>
+            </div>
 					<form action="<?php echo base_url().index_page()."/inicio/validacion";?>" method="post">
 					
 

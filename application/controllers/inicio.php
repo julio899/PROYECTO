@@ -24,6 +24,9 @@ var $datos=null;
 			case 'A':
 				redirect('administrador','refresh');
 				break;
+			case 'D':
+				redirect('docente','refresh');
+				break;
 			
 			default:
 				# code...

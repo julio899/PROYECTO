@@ -207,6 +207,19 @@ p.usu-identificador{
 	padding-right: 10px;
 	padding-top: 10px;
 }
+p.informacion{
+	text-align : justify;
+	padding-left:30px;
+	padding-right:30px; 
+	color: #777;
+	font-style: italic;
+}
+.bs-callout-info {
+    border-left-color: #5BC0DE;
+}
+.bs-callout-info h4 {
+    color: #5BC0DE;
+}
 </style>
 
   <script>
